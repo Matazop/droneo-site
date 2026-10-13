@@ -1,0 +1,10 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { site } from '../../data/site';
+---
+<Base title="Envoi impossible" description="Votre demande n'a pas pu être envoyée.">
+  <PageHero title="Oups, l'envoi n'a pas fonctionné." lead={`Vérifiez les champs et réessayez, ou contactez-moi directement au ${site.phone} ou à ${site.email}.`}>
+    <div class="btn-row" style="margin-top:28px"><a class="btn btn--primary" href="/devis/">Réessayer</a><a class="btn btn--ghost" href={`mailto:${site.email}`}>Écrire un email</a></div>
+  </PageHero>
+</Base>

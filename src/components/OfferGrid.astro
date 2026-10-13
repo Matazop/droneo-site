@@ -1,0 +1,22 @@
+---
+interface Offer { name: string; price: number | null; pitch: string; features: string[]; featured?: boolean }
+interface Props { offers: Offer[]; audience: 'particuliers' | 'pros' }
+const { offers, audience } = Astro.props;
+---
+<div class="grid grid-3">
+  {offers.map((o) => (
+    <article class={`card offer reveal ${o.featured ? 'offer--featured' : ''}`}>
+      {o.featured && <span class="offer__badge">La plus choisie</span>}
+      <h3>{o.name}</h3>
+      <p class="note">{o.pitch}</p>
+      <p class="offer__price">
+        {o.price ? (<><small>à partir de</small><br /><strong>{o.price} €</strong></>) : (<><small>sur mesure</small><br /><strong>Sur devis</strong></>)}
+      </p>
+      <ul>{o.features.map((f) => <li>{f}</li>)}</ul>
+      <a class={`btn ${o.featured ? 'btn--primary' : 'btn--outline'}`} href={`/devis/?profil=${audience}&formule=${encodeURIComponent(o.name)}`}>
+        {o.price ? `Choisir ${o.name}` : 'Décrire mon projet'}
+      </a>
+    </article>
+  ))}
+</div>
+<p class="note" style="margin-top:20px">Autorisations de vol incluses. Déplacement offert dans un rayon de 50 km. Prix indicatifs, le devis précise le contenu exact.</p>

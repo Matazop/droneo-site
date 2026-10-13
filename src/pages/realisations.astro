@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import VideoCard from '../components/VideoCard.astro';
+import VideoPlayer from '../components/VideoPlayer.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { videos } from '../data/site';
+---
+<Base title="Réalisations : vidéos drone en Vendée" description="Découvrez les vidéos aériennes réalisées par Droneo : mariages, immobilier, tourisme, événements sportifs et entreprises en Vendée.">
+  <PageHero eyebrow="Réalisations" title="Les images parlent d'elles-mêmes" lead="Une sélection de projets pour des particuliers et des professionnels, en Vendée et dans les Pays de la Loire." />
+  <section class="section">
+    <div class="wrap">
+      <div class="filters" role="group" aria-label="Filtrer les réalisations">
+        <button class="on" data-f="all">Tout</button>
+        <button data-f="particuliers">Particuliers</button>
+        <button data-f="pros">Professionnels</button>
+      </div>
+      <div class="grid grid-3" id="gallery">
+        {videos.map((v) => <VideoCard {...v} />)}
+      </div>
+    </div>
+  </section>
+  <CtaBand title="Et si la prochaine, c'était la vôtre ?" />
+  <VideoPlayer />
+  <script is:inline>
+    document.querySelectorAll('.filters button').forEach((b) => b.addEventListener('click', () => {
+      document.querySelectorAll('.filters button').forEach((x) => x.classList.toggle('on', x === b));
+      document.querySelectorAll('#gallery .video').forEach((v) => {
+        v.hidden = b.dataset.f !== 'all' && v.dataset.audience !== b.dataset.f;
+      });
+    }));
+  </script>
+</Base>
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .filters button { font: 600 .95rem var(--font-title); padding: 10px 20px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; color: var(--navy); cursor: pointer; }
+  .filters button.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+</style>

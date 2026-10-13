@@ -1,0 +1,151 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import { site, offersParticuliers, offersPros } from '../../data/site';
+const typesPart = ['Mariage', 'Anniversaire ou fête', 'Demande en mariage', 'Vue de ma propriété', 'Autre'];
+const typesPro = ['Immobilier', 'Tourisme / hébergement', "Vidéo d'entreprise", 'Événement / festival', 'Événement sportif', 'BTP / suivi de chantier', 'Partenariat', 'Autre'];
+---
+<Base title="Demander un devis gratuit" description={`Décrivez votre projet de vidéo drone en 2 minutes et recevez un devis clair sous ${site.responseDelay}. Vendée et Pays de la Loire.`}>
+  <PageHero eyebrow="Devis gratuit" title="Parlons de votre projet" lead={`2 minutes pour me décrire votre besoin, une réponse sous ${site.responseDelay}. Sans engagement.`} />
+  <section class="section">
+    <div class="wrap devis">
+      <form class="form card" id="devis" action="/devis.php" method="post" novalidate>
+        <div class="progress" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+        <input class="hp" type="text" name="site_web" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <fieldset class="step-panel active" data-step="1">
+          <h3>Vous êtes…</h3>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="profil" value="particuliers" required /><span>Un particulier<small>Mariage, fête, souvenir</small></span></label>
+            <label class="choice"><input type="radio" name="profil" value="pros" /><span>Un professionnel<small>Entreprise, agence, association</small></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="step-panel" data-step="2">
+          <h3>Votre projet</h3>
+          <div class="field">
+            <label for="type">Type de projet</label>
+            <select id="type" name="type" required>
+              <option value="">Choisir…</option>
+              <optgroup label="Particuliers" data-for="particuliers">{typesPart.map((t) => <option>{t}</option>)}</optgroup>
+              <optgroup label="Professionnels" data-for="pros">{typesPro.map((t) => <option>{t}</option>)}</optgroup>
+            </select>
+          </div>
+          <div class="field">
+            <label for="formule">Formule envisagée (facultatif)</label>
+            <select id="formule" name="formule">
+              <option value="">Je ne sais pas encore</option>
+              <optgroup label="Particuliers" data-for="particuliers">{offersParticuliers.map((o) => <option>{o.name}</option>)}</optgroup>
+              <optgroup label="Professionnels" data-for="pros">{offersPros.map((o) => <option>{o.name}</option>)}<option>Partenariat</option></optgroup>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset class="step-panel" data-step="3">
+          <h3>Quand et où ?</h3>
+          <div class="grid grid-2" style="gap:18px">
+            <div class="field"><label for="date">Date (même approximative)</label><input id="date" name="date" type="text" placeholder="ex. 14 juin 2027" /></div>
+            <div class="field"><label for="lieu">Lieu</label><input id="lieu" name="lieu" type="text" placeholder="ex. Les Sables-d'Olonne" required /></div>
+          </div>
+          <div class="field">
+            <label for="budget">Budget envisagé (facultatif)</label>
+            <select id="budget" name="budget">
+              <option value="">Je ne sais pas</option>
+              <option>Moins de 300 €</option><option>300 à 600 €</option><option>600 à 1 000 €</option><option>Plus de 1 000 €</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset class="step-panel" data-step="4">
+          <h3>Vos coordonnées</h3>
+          <div class="grid grid-2" style="gap:18px">
+            <div class="field"><label for="nom">Nom et prénom</label><input id="nom" name="nom" autocomplete="name" required /></div>
+            <div class="field"><label for="societe">Société (pros)</label><input id="societe" name="societe" autocomplete="organization" /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+            <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" autocomplete="tel" /></div>
+          </div>
+          <div class="field"><label for="message">Votre projet en quelques mots</label><textarea id="message" name="message" rows="4" placeholder="Ce que vous aimeriez montrer, l'ambiance, l'usage de la vidéo…"></textarea></div>
+          <label class="consent"><input type="checkbox" name="rgpd" required /> J'accepte que mes informations soient utilisées pour répondre à ma demande (<a href="/confidentialite/">confidentialité</a>).</label>
+        </fieldset>
+
+        <p class="form-error" id="err" role="alert" hidden>Merci de compléter les champs demandés.</p>
+        <div class="form-nav">
+          <button type="button" class="btn btn--outline" id="prev" hidden>Retour</button>
+          <button type="button" class="btn btn--primary" id="next" style="margin-left:auto">Continuer</button>
+          <button type="submit" class="btn btn--primary" id="send" hidden style="margin-left:auto">Envoyer ma demande</button>
+        </div>
+      </form>
+
+      <aside class="devis__aside">
+        <div class="card">
+          <h3>Plutôt en direct ?</h3>
+          <p><a href={`tel:${site.phoneIntl}`}><Icon name="phone" size={18} /> {site.phone}</a></p>
+          <p><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> WhatsApp</a></p>
+          <p><a href={`mailto:${site.email}`}><Icon name="mail" size={18} /> {site.email}</a></p>
+        </div>
+        <div class="card">
+          <h3>Ce qui se passe ensuite</h3>
+          <ol class="note" style="padding-left:18px;margin:0">
+            <li>Je lis votre demande et vous rappelle si besoin.</li>
+            <li>Vous recevez un devis clair sous {site.responseDelay}.</li>
+            <li>On fixe la date, je m'occupe des autorisations.</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const form = document.getElementById('devis');
+      const panels = [...form.querySelectorAll('.step-panel')];
+      const bars = [...form.querySelectorAll('.progress i')];
+      const prev = document.getElementById('prev'), next = document.getElementById('next'), send = document.getElementById('send'), err = document.getElementById('err');
+      let i = 0;
+      const params = new URLSearchParams(location.search);
+      const setProfil = (p) => {
+        form.querySelectorAll('optgroup[data-for]').forEach((g) => { g.hidden = g.dataset.for !== p; g.disabled = g.dataset.for !== p; });
+      };
+      if (params.get('profil')) {
+        const r = form.querySelector(`input[name=profil][value="${params.get('profil')}"]`);
+        if (r) { r.checked = true; setProfil(r.value); }
+      }
+      if (params.get('formule')) {
+        const f = params.get('formule');
+        const opt = [...form.formule.options].find((o) => o.value === f || o.text === f);
+        if (opt) opt.selected = true;
+        if (f === 'Partenariat') form.type.value = 'Partenariat';
+      }
+      form.querySelectorAll('input[name=profil]').forEach((r) => r.addEventListener('change', () => { setProfil(r.value); form.type.value = ''; setTimeout(() => go(1), 150); }));
+      const valid = () => [...panels[i].querySelectorAll('[required]')].every((el) => el.type === 'radio' ? form.querySelector(`input[name="${el.name}"]:checked`) : el.type === 'checkbox' ? el.checked : el.checkValidity() && el.value.trim());
+      const show = () => {
+        panels.forEach((p, k) => p.classList.toggle('active', k === i));
+        bars.forEach((b, k) => b.classList.toggle('on', k <= i));
+        prev.hidden = i === 0; next.hidden = i === panels.length - 1; send.hidden = i !== panels.length - 1; err.hidden = true;
+      };
+      const go = (d) => {
+        if (d > 0 && !valid()) { err.hidden = false; return; }
+        i = Math.max(0, Math.min(panels.length - 1, i + d)); show();
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+      next.addEventListener('click', () => go(1));
+      prev.addEventListener('click', () => go(-1));
+      form.addEventListener('submit', (e) => { if (!valid()) { e.preventDefault(); err.hidden = false; } });
+      show();
+    })();
+  </script>
+</Base>
+<style>
+  .devis { display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: start; }
+  .devis .card { padding: clamp(22px, 4vw, 40px); }
+  .devis__aside { display: grid; gap: 20px; }
+  .devis__aside a { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: .92rem; color: var(--muted); margin-top: 8px; }
+  .consent input { margin-top: 5px; }
+  .form-error { color: #c0262d; font-weight: 600; margin: 0; }
+  html:not(.js) .progress, html:not(.js) #next, html:not(.js) #prev { display: none; }
+  html:not(.js) #send { display: inline-flex !important; }
+  @media (max-width: 860px) { .devis { grid-template-columns: 1fr; } }
+</style>

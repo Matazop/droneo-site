@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import OfferGrid from '../components/OfferGrid.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { offersParticuliers, servicesParticuliers, launchOffers } from '../data/site';
+const reassurance = [
+  { icon: 'clock', title: 'Discret', text: "Les vols sont courts et planifiés avec vous. Le drone ne perturbe ni la cérémonie, ni vos invités." },
+  { icon: 'shield', title: 'En sécurité', text: 'Distances de sécurité respectées, autorisations demandées, assurance professionnelle.' },
+  { icon: 'spark', title: 'Sans stress météo', text: "Si le temps ne permet pas de voler, on trouve une solution ensemble : report sans frais ou adaptation du programme." },
+];
+---
+<Base title="Vidéo drone mariage et événements privés en Vendée"
+  description="Vidéo drone pour votre mariage, anniversaire ou fête de famille en Vendée. Film souvenir monté sur mesure par un télépilote certifié. Formules dès 390 €.">
+  <PageHero eyebrow="Particuliers" title="Le souvenir que vos invités n'auront pas sur leur téléphone."
+    lead="Mariage, anniversaire, fête de famille : des images aériennes uniques, montées en un film que vous reverrez toute votre vie.">
+    <div class="btn-row" style="margin-top:28px">
+      <a class="btn btn--primary" href="#formules">Voir les formules</a>
+      <a class="btn btn--ghost" href="/devis/?profil=particuliers">Parlons de votre événement</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Pour quelles occasions ?</span>
+        <h2>Vos moments, sous un angle inédit</h2>
+      </div>
+      <div class="grid grid-4">
+        {servicesParticuliers.map((s) => (
+          <div class="card reveal"><h3>{s.title}</h3><p>{s.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft" id="formules">
+    <div class="wrap">
+      <div class="section-head section-head--center reveal">
+        <span class="eyebrow">Formules</span>
+        <h2>Des prix clairs, sans surprise</h2>
+        <p class="lead">Montage, musique et autorisations de vol sont toujours inclus.</p>
+      </div>
+      <OfferGrid offers={offersParticuliers} audience="particuliers" />
+      <div class="promo reveal"><span class="play play--sm"></span>{launchOffers.particuliers}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Vos questions</span>
+        <h2>Vous n'avez qu'à profiter</h2>
+      </div>
+      <div class="grid grid-3">
+        {reassurance.map((r) => (
+          <div class="card reveal"><div class="icon"><Icon name={r.icon} /></div><h3>{r.title}</h3><p>{r.text}</p></div>
+        ))}
+      </div>
+      <p style="margin-top:28px"><a href="/faq/">Toutes les questions fréquentes →</a></p>
+    </div>
+  </section>
+
+  <CtaBand title="Parlons de votre événement" text="Date, lieu, envies : dites-m'en un peu plus et recevez une proposition sous 48 h." href="/devis/?profil=particuliers" label="Demander mon devis gratuit" />
+</Base>

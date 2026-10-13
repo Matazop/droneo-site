@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import OfferGrid from '../components/OfferGrid.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { offersPros, servicesPros, launchOffers } from '../data/site';
+const included = [
+  { icon: 'shield', title: 'Conformité garantie', text: "Un vol professionnel exige un télépilote certifié, des déclarations et une assurance. Faire voler un amateur expose votre entreprise. Avec Droneo, tout est en règle." },
+  { icon: 'clock', title: 'Délais tenus', text: 'Délais annoncés dans le devis. 72 h pour une prestation immobilière.' },
+  { icon: 'share', title: 'Tous vos formats', text: '16:9 pour votre site et YouTube, 9:16 pour les Reels et TikTok, 1:1 pour LinkedIn et Facebook.' },
+  { icon: 'euro', title: 'Devis et facture', text: "Un devis détaillé sous 48 h et les droits d'utilisation commerciale inclus dans les formules pros." },
+];
+---
+<Base title="Vidéo et photo drone pour professionnels en Vendée : immobilier, tourisme, entreprise"
+  description="Prises de vue aériennes pour l'immobilier, le tourisme, les entreprises et les événements en Vendée. Télépilote certifié, droits commerciaux inclus, livraison rapide. Dès 190 €.">
+  <PageHero eyebrow="Professionnels" title="Des images aériennes qui valorisent votre activité."
+    lead="Immobilier, tourisme, entreprise, événementiel : des vidéos qui attirent l'attention et donnent envie, livrées dans tous les formats dont vous avez besoin.">
+    <div class="btn-row" style="margin-top:28px">
+      <a class="btn btn--primary" href="/devis/?profil=pros">Obtenir un devis sous 48 h</a>
+      <a class="btn btn--ghost" href="#offres">Voir les offres</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Secteurs</span>
+        <h2>Ce que le drone apporte à votre activité</h2>
+      </div>
+      <div class="grid grid-3">
+        {servicesPros.map((s) => (
+          <div class="card reveal" id={s.id} style="scroll-margin-top:100px"><h3>{s.title}</h3><p>{s.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Travailler avec Droneo</span>
+        <h2>Un prestataire fiable, sans mauvaise surprise</h2>
+      </div>
+      <div class="grid grid-4">
+        {included.map((r) => (
+          <div class="card reveal"><div class="icon"><Icon name={r.icon} /></div><h3>{r.title}</h3><p>{r.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="offres">
+    <div class="wrap">
+      <div class="section-head section-head--center reveal">
+        <span class="eyebrow">Offres</span>
+        <h2>Des formules pensées pour les pros</h2>
+        <p class="lead">Un prix de départ clair, ajusté à votre besoin dans le devis.</p>
+      </div>
+      <OfferGrid offers={offersPros} audience="pros" />
+      <div class="promo reveal"><span class="play play--sm"></span>{launchOffers.pros}</div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">Partenaires</span>
+        <h2>Vidéastes, photographes, agences : travaillons ensemble</h2>
+        <p class="lead">Vous couvrez un mariage ou un événement sans drone ? J'interviens en complément de votre équipe, avec des images livrées prêtes à intégrer à votre montage.</p>
+        <a class="btn btn--outline" href="/devis/?profil=pros&formule=Partenariat">Proposer un partenariat</a>
+      </div>
+      <div class="card reveal">
+        <h3>Clients récurrents</h3>
+        <p>Agences immobilières, campings, promoteurs : des conditions adaptées pour des prises de vue régulières tout au long de l'année.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Parlons de votre projet" text="Décrivez votre besoin en 2 minutes, recevez un devis détaillé sous 48 h." href="/devis/?profil=pros" label="Obtenir mon devis" />
+</Base>

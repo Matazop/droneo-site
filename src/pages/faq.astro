@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { faq } from '../data/site';
+const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<Base title="Questions fréquentes sur la vidéo drone" description="Légalité, météo, délais, prix, droits d'utilisation : les réponses à vos questions sur les prestations de vidéo drone Droneo en Vendée.">
+  <PageHero eyebrow="FAQ" title="Vos questions, mes réponses" lead="Tout ce qu'il faut savoir avant de réserver une prestation drone." />
+  <section class="section">
+    <div class="wrap faq prose">
+      {faq.map((f, i) => (
+        <details open={i === 0}><summary>{f.q}</summary><p>{f.a}</p></details>
+      ))}
+    </div>
+  </section>
+  <CtaBand title="Une autre question ?" text="Écrivez-moi ou appelez-moi, je vous réponds rapidement." label="Me contacter" />
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</Base>

@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+<Base title="Politique de confidentialité" description="Comment Droneo utilise et protège vos données personnelles.">
+  <PageHero title="Politique de confidentialité" />
+  <section class="section"><div class="wrap prose">
+    <h2>Données collectées</h2>
+    <p>Lorsque vous remplissez le formulaire de devis, nous recueillons les informations que vous saisissez (nom, email, téléphone, détails du projet). Elles servent uniquement à répondre à votre demande et à établir un devis.</p>
+    <h2>Durée de conservation</h2>
+    <p>Vos données sont conservées 3 ans après notre dernier échange, puis supprimées.</p>
+    <h2>Partage</h2>
+    <p>Vos données ne sont ni vendues ni cédées à des tiers.</p>
+    <h2>Cookies</h2>
+    <p>Ce site n'utilise pas de cookies publicitaires. Les vidéos YouTube sont chargées en mode « confidentialité renforcée », seulement lorsque vous cliquez pour les lire.</p>
+    <h2>Vos droits</h2>
+    <p>Vous pouvez accéder à vos données, les rectifier ou demander leur suppression en écrivant à <a href={`mailto:${site.email}`}>{site.email}</a>. Vous pouvez aussi saisir la CNIL (<a href="https://www.cnil.fr" rel="noopener">cnil.fr</a>).</p>
+  </div></section>
+</Base>

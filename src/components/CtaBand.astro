@@ -1,0 +1,21 @@
+---
+import { site } from '../data/site';
+interface Props { title?: string; text?: string; label?: string; href?: string }
+const {
+  title = 'Un projet en tête ? Parlons-en.',
+  text = `Décrivez votre projet en 2 minutes. Je vous réponds sous ${site.responseDelay} avec un devis clair.`,
+  label = 'Demander un devis gratuit',
+  href = '/devis/',
+} = Astro.props;
+---
+<section class="section section--navy cta-band">
+  <div class="wrap reveal">
+    <span class="play" style="margin-bottom:24px"></span>
+    <h2>{title}</h2>
+    <p class="lead" style="max-width:620px;margin-inline:auto">{text}</p>
+    <div class="btn-row">
+      <a class="btn btn--primary" href={href}>{label}</a>
+      <a class="btn btn--ghost" href={`tel:${site.phoneIntl}`}>Appeler le {site.phone}</a>
+    </div>
+  </div>
+</section>

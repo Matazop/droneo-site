@@ -1,0 +1,22 @@
+---
+interface Props { title: string; category: string; context: string; youtubeId?: string; audience?: string }
+const { title, category, context, youtubeId, audience } = Astro.props;
+---
+<article class="video reveal" data-audience={audience} data-category={category}>
+  {youtubeId ? (
+    <button class="video__media" data-yt={youtubeId} aria-label={`Lire la vidéo : ${title}`}
+      style={`background-image:url(https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg);background-size:cover;background-position:center`}>
+      <span class="play play--light"></span>
+    </button>
+  ) : (
+    <div class="video__media" role="img" aria-label={`${title} (vidéo à venir)`}>
+      <span class="play play--light"></span>
+      <span class="soon">Vidéo à venir</span>
+    </div>
+  )}
+  <div class="video__body">
+    <span class="tag">{category}</span>
+    <h3>{title}</h3>
+    <p class="note" style="margin:0">{context}</p>
+  </div>
+</article>

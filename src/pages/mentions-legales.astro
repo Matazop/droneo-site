@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+<Base title="Mentions légales" description="Mentions légales du site droneo.fr.">
+  <PageHero title="Mentions légales" />
+  <section class="section"><div class="wrap prose">
+    <h2>Éditeur du site</h2>
+    <p>Droneo, {site.pilot}<br />
+    Statut juridique : [À COMPLÉTER, ex. entrepreneur individuel]<br />
+    SIRET : [À COMPLÉTER]<br />
+    Adresse : [À COMPLÉTER]<br />
+    Email : {site.email} · Téléphone : {site.phone}<br />
+    Directeur de la publication : {site.pilot}</p>
+    <h2>Hébergement</h2>
+    <p>Hostinger International Ltd, 61 Lordou Vironos Street, 6023 Larnaca, Chypre. <a href="https://www.hostinger.fr" rel="noopener">www.hostinger.fr</a></p>
+    <h2>Activité de télépilote</h2>
+    <p>Prestations réalisées par un télépilote titulaire du CATS, conformément à la réglementation européenne et française sur les drones. Assurance responsabilité civile professionnelle : [À COMPLÉTER, nom de l'assureur].</p>
+    <h2>Propriété intellectuelle</h2>
+    <p>L'ensemble des contenus de ce site (vidéos, photos, textes, logo) est la propriété de Droneo, sauf mention contraire. Toute reproduction sans autorisation est interdite.</p>
+  </div></section>
+</Base>

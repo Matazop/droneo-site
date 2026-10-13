@@ -1,0 +1,167 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Trust from '../components/Trust.astro';
+import VideoCard from '../components/VideoCard.astro';
+import VideoPlayer from '../components/VideoPlayer.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, pillars, steps, videos } from '../data/site';
+---
+<Base title="Droneo | Vidéo drone sur mesure en Vendée, mariages, événements, entreprises"
+  description="Vidéos et photos aériennes par drone en Vendée et Pays de la Loire. Mariages, événements, immobilier, entreprises : une vidéo sur mesure par un télépilote certifié CATS. Devis sous 48 h.">
+
+  <section class="hero">
+    {site.heroVideo && (
+      <video class="hero__video" src={site.heroVideo} autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    )}
+    <div class="hero__sky" aria-hidden="true"></div>
+    <div class="wrap hero__inner">
+      <div class="hero__text">
+        <span class="eyebrow" style="color:#5fb0ff">Vidéaste drone · Vendée</span>
+        <h1>Vos plus beaux moments, <span class="hl">vus du ciel.</span></h1>
+        <p class="lead">Des vidéos aériennes sur mesure, filmées et montées par un télépilote certifié. Pour les particuliers comme pour les professionnels.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/particuliers/">Je suis un particulier</a>
+          <a class="btn btn--white" href="/professionnels/">Je suis un professionnel</a>
+        </div>
+        <a class="hero__demo" href={site.demoYoutubeId ? `https://www.youtube.com/watch?v=${site.demoYoutubeId}` : '/realisations/'}>
+          <span class="play play--sm play--light"></span> Voir la bande démo
+        </a>
+      </div>
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero__ring"></div>
+        <img src="/img/logo-mark-dark.png" alt="" width="201" height="202" />
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><Trust /></div>
+
+  <section class="section section--soft">
+    <div class="wrap">
+      <div class="section-head section-head--center reveal">
+        <span class="eyebrow">Pourquoi Droneo</span>
+        <h2>Bien plus que des images de drone</h2>
+        <p class="lead">Une vraie vidéo, pensée pour vous, de la préparation au montage final.</p>
+      </div>
+      <div class="grid grid-4">
+        {pillars.map((p) => (
+          <div class="card reveal">
+            <div class="icon"><Icon name={p.icon} /></div>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head section-head--center reveal">
+        <span class="eyebrow">Vos projets</span>
+        <h2>Pour vous ou pour votre activité</h2>
+      </div>
+      <div class="grid grid-2">
+        <a href="/particuliers/" class="path path--a reveal" style="text-decoration:none">
+          <img class="bg-mark" src="/img/logo-mark-dark.png" alt="" />
+          <span class="eyebrow" style="color:#fff;opacity:.8">Particuliers</span>
+          <h3>Un souvenir que personne d'autre n'aura</h3>
+          <ul><li>Mariages</li><li>Anniversaires et fêtes de famille</li><li>Demandes en mariage</li></ul>
+          <span class="btn btn--white" style="align-self:flex-start">Découvrir les formules · dès 390 €</span>
+        </a>
+        <a href="/professionnels/" class="path path--b reveal" style="text-decoration:none">
+          <img class="bg-mark" src="/img/logo-mark-dark.png" alt="" />
+          <span class="eyebrow" style="color:#5fb0ff">Professionnels</span>
+          <h3>Des images qui valorisent votre activité</h3>
+          <ul><li>Immobilier, tourisme et hébergement</li><li>Vidéo d'entreprise et chantiers</li><li>Événements, festivals et sport</li></ul>
+          <span class="btn btn--primary" style="align-self:flex-start">Voir les offres pros · dès 190 €</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="wrap">
+      <div class="section-head reveal" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;max-width:none">
+        <div style="max-width:620px">
+          <span class="eyebrow">Réalisations</span>
+          <h2>Les images parlent d'elles-mêmes</h2>
+        </div>
+        <a class="btn btn--outline" href="/realisations/">Toutes les réalisations</a>
+      </div>
+      <div class="grid grid-3">
+        {videos.slice(0, 3).map((v) => <VideoCard {...v} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head section-head--center reveal">
+        <span class="eyebrow">Comment ça marche</span>
+        <h2>Simple, du premier message à la livraison</h2>
+      </div>
+      <div class="grid grid-4 steps">
+        {steps.map((s) => (
+          <div class="step reveal">
+            <h3>{s.title}</h3>
+            <p class="note">{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">Votre pilote</span>
+        <h2>{site.pilot}, télépilote certifié</h2>
+        <p class="lead">Passionné d'image et de pilotage, je mets mon expérience au service de vos projets, partout en Vendée et dans les Pays de la Loire.</p>
+        <p>Titulaire du CATS, je vole dans le respect de la réglementation : déclarations, autorisations et assurance professionnelle. Vous n'avez à vous occuper de rien, sinon de profiter du résultat.</p>
+        <a class="btn btn--outline" href="/a-propos/">En savoir plus</a>
+      </div>
+      <div class="card reveal" style="text-align:center;padding:48px 28px">
+        <img src="/img/logo-full.png" alt="Logo Droneo" width="180" height="181" style="margin:0 auto 20px" />
+        <p class="quote">« Une vidéo réussie, c'est d'abord une histoire bien comprise. Le drone n'est que l'outil. »</p>
+        <p class="note">{site.pilot}</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+  <VideoPlayer />
+</Base>
+
+<style>
+  .hero {
+    position: relative; min-height: min(100vh, 860px); display: flex; align-items: center;
+    background: radial-gradient(1200px 600px at 80% 20%, #0a4f96 0%, transparent 60%), linear-gradient(170deg, var(--navy) 0%, var(--navy-900) 100%);
+    color: #d6e4f5; overflow: hidden; padding: 120px 0 80px;
+  }
+  .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; }
+  .hero__sky {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%);
+  }
+  .hero__inner { position: relative; display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 40px; }
+  .hero h1 { color: #fff; }
+  .hero .hl { color: #4aa3ff; }
+  .hero .lead { color: #c3d6ee; max-width: 560px; margin-bottom: 32px; }
+  .hero__demo { display: inline-flex; align-items: center; gap: 12px; margin-top: 28px; color: #fff; font-family: var(--font-title); font-weight: 600; }
+  .hero__visual { position: relative; display: grid; place-items: center; aspect-ratio: 1; }
+  .hero__visual img { width: 62%; animation: hover 6s ease-in-out infinite; filter: drop-shadow(0 30px 40px rgba(0,0,0,.35)); }
+  .hero__ring { position: absolute; inset: 6%; border-radius: 50%; border: 1px dashed rgba(95,176,255,.35); animation: spin 40s linear infinite; }
+  .hero__ring::before { content: ''; position: absolute; inset: 14%; border-radius: 50%; border: 1px solid rgba(95,176,255,.18); }
+  @keyframes hover { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-18px) rotate(2deg); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 860px) {
+    .hero__inner { grid-template-columns: 1fr; }
+    .hero__visual { display: none; }
+  }
+</style>
