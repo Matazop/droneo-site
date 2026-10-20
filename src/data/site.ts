@@ -7,6 +7,7 @@ import professionnels from '../content/professionnels.json';
 import realisations from '../content/realisations.json';
 import faqData from '../content/faq.json';
 import aPropos from '../content/a-propos.json';
+import devis from '../content/devis.json';
 
 const digits = (s: string) => (s || '').replace(/\D/g, '');
 const intl = (s: string) => {
@@ -43,15 +44,15 @@ export type Offer = { name: string; price: number | null; pitch: string; feature
 const toOffers = (l: any[]): Offer[] =>
   l.map((o) => ({ name: o.nom, price: o.prix ? Number(o.prix) : null, pitch: o.accroche, features: o.inclus || [], featured: !!o.miseEnAvant }));
 
-export { accueil, particuliers, professionnels, aPropos };
+export { accueil, particuliers, professionnels, aPropos, devis };
 
 export const pillars = accueil.piliers.map((p: any) => ({ title: p.titre, text: p.texte, icon: p.icone }));
 export const steps = accueil.etapes.map((p: any) => ({ title: p.titre, text: p.texte }));
 export const offersParticuliers = toOffers(particuliers.formules);
 export const offersPros = toOffers(professionnels.formules);
 export const launchOffers = { particuliers: particuliers.offreLancement, pros: professionnels.offreLancement };
-export const servicesParticuliers = particuliers.occasions.map((x: any) => ({ title: x.titre, text: x.texte }));
-export const servicesPros = professionnels.secteurs.map((x: any) => ({ id: x.ancre, title: x.titre, text: x.texte }));
+export const servicesParticuliers = particuliers.occasions.map((x: any) => ({ title: x.titre, text: x.texte, examples: x.exemples || '', icon: x.icone || 'spark' }));
+export const servicesPros = professionnels.secteurs.map((x: any) => ({ id: x.ancre, title: x.titre, text: x.texte, examples: x.exemples || '', icon: x.icone || 'spark' }));
 export const videos = (realisations as any[]).map((v) => ({
   title: v.titre,
   category: v.categorie,

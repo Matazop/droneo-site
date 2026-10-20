@@ -23,9 +23,9 @@ const reassurance = particuliers.reassurance.map((r) => ({ icon: r.icone, title:
         <span class="eyebrow">Pour quelles occasions ?</span>
         <h2>Vos moments, sous un angle inédit</h2>
       </div>
-      <div class="grid grid-4">
+      <div class="grid grid-3">
         {servicesParticuliers.map((s) => (
-          <div class="card reveal"><h3>{s.title}</h3><p>{s.text}</p></div>
+          <div class="card reveal"><div class="icon"><Icon name={s.icon} /></div><h3>{s.title}</h3><p class="note" style="margin-bottom:8px">{s.examples}</p><p>{s.text}</p></div>
         ))}
       </div>
     </div>

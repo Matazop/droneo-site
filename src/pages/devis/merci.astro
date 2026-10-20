@@ -4,7 +4,7 @@ import PageHero from '../../components/PageHero.astro';
 import { site } from '../../data/site';
 ---
 <Base title="Merci pour votre demande" description="Votre demande de devis a bien été envoyée.">
-  <PageHero eyebrow="Demande envoyée" title="Merci ! Votre demande est bien partie." lead={`Je vous réponds sous ${site.responseDelay}. En attendant, jetez un œil aux dernières réalisations.`}>
+  <PageHero eyebrow="✓ Demande envoyée" title="Merci ! Votre demande est bien partie." lead={`Je vous réponds sous ${site.responseDelay}. En attendant, jetez un œil aux dernières réalisations.`}>
     <div class="btn-row" style="margin-top:28px"><a class="btn btn--primary" href="/realisations/">Voir les réalisations</a><a class="btn btn--ghost" href="/">Retour à l'accueil</a></div>
   </PageHero>
 </Base>

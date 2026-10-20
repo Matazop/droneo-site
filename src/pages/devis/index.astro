@@ -2,80 +2,170 @@
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import Icon from '../../components/Icon.astro';
-import { site, offersParticuliers, offersPros } from '../../data/site';
-const typesPart = ['Mariage', 'Anniversaire ou fête', 'Demande en mariage', 'Vue de ma propriété', 'Autre'];
-const typesPro = ['Immobilier', 'Tourisme / hébergement', "Vidéo d'entreprise", 'Événement / festival', 'Événement sportif', 'BTP / suivi de chantier', 'Partenariat', 'Autre'];
+import { site, devis, offersParticuliers, offersPros, servicesParticuliers, servicesPros } from '../../data/site';
+
+const countries = [
+  { code: 'FR', flag: '🇫🇷', dial: '+33', name: 'France' },
+  { code: 'BE', flag: '🇧🇪', dial: '+32', name: 'Belgique' },
+  { code: 'CH', flag: '🇨🇭', dial: '+41', name: 'Suisse' },
+  { code: 'LU', flag: '🇱🇺', dial: '+352', name: 'Luxembourg' },
+  { code: 'DE', flag: '🇩🇪', dial: '+49', name: 'Allemagne' },
+  { code: 'ES', flag: '🇪🇸', dial: '+34', name: 'Espagne' },
+  { code: 'IT', flag: '🇮🇹', dial: '+39', name: 'Italie' },
+  { code: 'GB', flag: '🇬🇧', dial: '+44', name: 'Royaume-Uni' },
+  { code: 'NL', flag: '🇳🇱', dial: '+31', name: 'Pays-Bas' },
+];
+const today = new Date().toISOString().slice(0, 10);
 ---
-<Base title="Demander un devis gratuit" description={`Décrivez votre projet de vidéo drone en 2 minutes et recevez un devis clair sous ${site.responseDelay}. Vendée et Pays de la Loire.`}>
-  <PageHero eyebrow="Devis gratuit" title="Parlons de votre projet" lead={`2 minutes pour me décrire votre besoin, une réponse sous ${site.responseDelay}. Sans engagement.`} />
+<Base title="Demander un devis gratuit" description={`Décrivez votre projet de vidéo ou photo drone en 2 minutes et recevez un devis clair sous ${site.responseDelay}. Vendée et Pays de la Loire.`}>
+  <PageHero eyebrow="Devis gratuit" title={devis.titre} lead={devis.introduction} />
   <section class="section">
     <div class="wrap devis">
-      <form class="form card" id="devis" action="/devis.php" method="post" novalidate>
-        <div class="progress" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
-        <input class="hp" type="text" name="site_web" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <div>
+        <form class="form card" id="devis" action="/devis.php" method="post" novalidate>
+          <div class="progress" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+          <p class="step-count note" id="step-count">Étape 1 sur 4</p>
+          <input class="hp" type="text" name="site_web" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
-        <fieldset class="step-panel active" data-step="1">
-          <h3>Vous êtes…</h3>
-          <div class="choices">
-            <label class="choice"><input type="radio" name="profil" value="particuliers" required /><span>Un particulier<small>Mariage, fête, souvenir</small></span></label>
-            <label class="choice"><input type="radio" name="profil" value="pros" /><span>Un professionnel<small>Entreprise, agence, association</small></span></label>
+          <div class="alert alert--error" id="err" role="alert" hidden>
+            <Icon name="alert" size={20} /><span id="err-text">Il manque quelques informations pour continuer.</span>
           </div>
-        </fieldset>
 
-        <fieldset class="step-panel" data-step="2">
-          <h3>Votre projet</h3>
-          <div class="field">
-            <label for="type">Type de projet</label>
-            <select id="type" name="type" required>
-              <option value="">Choisir…</option>
-              <optgroup label="Particuliers" data-for="particuliers">{typesPart.map((t) => <option>{t}</option>)}</optgroup>
-              <optgroup label="Professionnels" data-for="pros">{typesPro.map((t) => <option>{t}</option>)}</optgroup>
-            </select>
-          </div>
-          <div class="field">
-            <label for="formule">Formule envisagée (facultatif)</label>
-            <select id="formule" name="formule">
-              <option value="">Je ne sais pas encore</option>
-              <optgroup label="Particuliers" data-for="particuliers">{offersParticuliers.map((o) => <option>{o.name}</option>)}</optgroup>
-              <optgroup label="Professionnels" data-for="pros">{offersPros.map((o) => <option>{o.name}</option>)}<option>Partenariat</option></optgroup>
-            </select>
-          </div>
-        </fieldset>
+          <!-- Étape 1 -->
+          <fieldset class="step-panel active" data-step="1">
+            <legend><h3>Vous êtes…</h3></legend>
+            <div class="field" data-field="profil">
+              <div class="choices">
+                <label class="choice"><input type="radio" name="profil" value="particuliers" required /><span><Icon name="party" /> Un particulier<small>Fête, sport, nature, projet perso</small></span></label>
+                <label class="choice"><input type="radio" name="profil" value="pros" /><span><Icon name="building" /> Un professionnel<small>Entreprise, agence, association, collectivité</small></span></label>
+              </div>
+              <p class="field-msg"><Icon name="alert" size={16} /> Indiquez si vous êtes un particulier ou un professionnel.</p>
+            </div>
+          </fieldset>
 
-        <fieldset class="step-panel" data-step="3">
-          <h3>Quand et où ?</h3>
-          <div class="grid grid-2" style="gap:18px">
-            <div class="field"><label for="date">Date (même approximative)</label><input id="date" name="date" type="text" placeholder="ex. 14 juin 2027" /></div>
-            <div class="field"><label for="lieu">Lieu</label><input id="lieu" name="lieu" type="text" placeholder="ex. Les Sables-d'Olonne" required /></div>
-          </div>
-          <div class="field">
-            <label for="budget">Budget envisagé (facultatif)</label>
-            <select id="budget" name="budget">
-              <option value="">Je ne sais pas</option>
-              <option>Moins de 300 €</option><option>300 à 600 €</option><option>600 à 1 000 €</option><option>Plus de 1 000 €</option>
-            </select>
-          </div>
-        </fieldset>
+          <!-- Étape 2 -->
+          <fieldset class="step-panel" data-step="2">
+            <legend><h3>Quelle prestation vous intéresse ?</h3></legend>
+            <div class="field" data-field="prestation">
+              <div class="choices choices--list" data-for="particuliers">
+                {servicesParticuliers.map((s) => (
+                  <label class="choice"><input type="radio" name="prestation" value={s.title} required /><span><Icon name={s.icon} /> {s.title}<small>{s.examples}</small></span></label>
+                ))}
+              </div>
+              <div class="choices choices--list" data-for="pros">
+                {servicesPros.map((s) => (
+                  <label class="choice"><input type="radio" name="prestation" value={s.title} required /><span><Icon name={s.icon} /> {s.title}<small>{s.examples}</small></span></label>
+                ))}
+              </div>
+              <p class="field-msg"><Icon name="alert" size={16} /> Choisissez la prestation qui correspond le mieux à votre projet.</p>
+            </div>
+            <div class="field">
+              <label for="details">Détaillez votre demande <span class="opt">(facultatif)</span></label>
+              <textarea id="details" name="details" rows="3" placeholder="Ce que vous aimeriez montrer, l'ambiance, la durée souhaitée, l'usage de la vidéo…"></textarea>
+            </div>
+            <div class="field">
+              <label for="formule">Formule envisagée <span class="opt">(facultatif)</span></label>
+              <select id="formule" name="formule">
+                <option value="">Je ne sais pas encore</option>
+                <optgroup label="Particuliers" data-for="particuliers">{offersParticuliers.map((o) => <option value={o.name}>{o.name}{o.price ? ` (dès ${o.price} €)` : ''}</option>)}</optgroup>
+                <optgroup label="Professionnels" data-for="pros">{offersPros.map((o) => <option value={o.name}>{o.name}{o.price ? ` (dès ${o.price} €)` : ''}</option>)}<option>Partenariat</option></optgroup>
+              </select>
+            </div>
+          </fieldset>
 
-        <fieldset class="step-panel" data-step="4">
-          <h3>Vos coordonnées</h3>
-          <div class="grid grid-2" style="gap:18px">
-            <div class="field"><label for="nom">Nom et prénom</label><input id="nom" name="nom" autocomplete="name" required /></div>
-            <div class="field"><label for="societe">Société (pros)</label><input id="societe" name="societe" autocomplete="organization" /></div>
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
-            <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" autocomplete="tel" /></div>
-          </div>
-          <div class="field"><label for="message">Votre projet en quelques mots</label><textarea id="message" name="message" rows="4" placeholder="Ce que vous aimeriez montrer, l'ambiance, l'usage de la vidéo…"></textarea></div>
-          <label class="consent"><input type="checkbox" name="rgpd" required /> J'accepte que mes informations soient utilisées pour répondre à ma demande (<a href="/confidentialite/">confidentialité</a>).</label>
-        </fieldset>
+          <!-- Étape 3 -->
+          <fieldset class="step-panel" data-step="3">
+            <legend><h3>Quand et où ?</h3></legend>
+            <div class="grid grid-2" style="gap:18px">
+              <div class="field" data-field="date">
+                <label for="date">Date souhaitée</label>
+                <div class="input-icon">
+                  <Icon name="calendar" size={20} />
+                  <input id="date" name="date" type="date" min={today} required />
+                </div>
+                <label class="check-inline"><input type="checkbox" id="date-flex" name="date_flexible" value="oui" /> Date pas encore fixée</label>
+                <p class="field-msg"><Icon name="alert" size={16} /> Choisissez une date, ou cochez « Date pas encore fixée ».</p>
+              </div>
+              <div class="field" data-field="lieu">
+                <label for="lieu">Lieu du tournage</label>
+                <div class="combo">
+                  <div class="input-icon">
+                    <Icon name="pin" size={20} />
+                    <input id="lieu" name="lieu" type="text" required autocomplete="off" placeholder="Ville ou adresse, ex. Les Sables-d'Olonne"
+                      role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="lieu-list" />
+                  </div>
+                  <ul class="combo__list" id="lieu-list" role="listbox" hidden></ul>
+                </div>
+                <p class="field-msg"><Icon name="alert" size={16} /> Indiquez la ville ou l'adresse du tournage.</p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="budget">Budget envisagé <span class="opt">(facultatif)</span></label>
+              <select id="budget" name="budget">
+                <option value="">Je ne sais pas</option>
+                <option>Moins de 300 €</option><option>300 à 600 €</option><option>600 à 1 000 €</option><option>Plus de 1 000 €</option>
+              </select>
+            </div>
+          </fieldset>
 
-        <p class="form-error" id="err" role="alert" hidden>Merci de compléter les champs demandés.</p>
-        <div class="form-nav">
-          <button type="button" class="btn btn--outline" id="prev" hidden>Retour</button>
-          <button type="button" class="btn btn--primary" id="next" style="margin-left:auto">Continuer</button>
-          <button type="submit" class="btn btn--primary" id="send" hidden style="margin-left:auto">Envoyer ma demande</button>
+          <!-- Étape 4 -->
+          <fieldset class="step-panel" data-step="4">
+            <legend><h3>Vos coordonnées</h3></legend>
+            <div class="grid grid-2" style="gap:18px">
+              <div class="field" data-field="nom">
+                <label for="nom">Nom et prénom</label>
+                <input id="nom" name="nom" autocomplete="name" required />
+                <p class="field-msg"><Icon name="alert" size={16} /> Indiquez votre nom.</p>
+              </div>
+              <div class="field" data-only="pros">
+                <label for="societe">Société <span class="opt">(facultatif)</span></label>
+                <input id="societe" name="societe" autocomplete="organization" />
+              </div>
+              <div class="field" data-field="email">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required placeholder="vous@exemple.fr" />
+                <p class="field-msg"><Icon name="alert" size={16} /> <span>Indiquez une adresse email valide.</span></p>
+              </div>
+              <div class="field" data-field="tel">
+                <label for="tel">Téléphone</label>
+                <div class="phone">
+                  <select id="indicatif" name="indicatif" aria-label="Indicatif du pays">
+                    {countries.map((c) => <option value={c.dial} data-code={c.code}>{c.flag} {c.dial}</option>)}
+                  </select>
+                  <input id="tel" name="tel_local" type="tel" inputmode="numeric" autocomplete="tel-national" required placeholder="07 10 10 10 10" maxlength="14" />
+                  <input type="hidden" name="tel" id="tel-full" />
+                </div>
+                <p class="field-msg"><Icon name="alert" size={16} /> <span id="tel-msg">Le numéro doit contenir 10 chiffres et commencer par 0, ex. 07 10 10 10 10.</span></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="message">Autre chose à ajouter ? <span class="opt">(facultatif)</span></label>
+              <textarea id="message" name="message" rows="3" placeholder="Une contrainte, une question, un lien d'inspiration…"></textarea>
+            </div>
+            <div class="field" data-field="rgpd">
+              <label class="consent"><input type="checkbox" name="rgpd" required /><span>J'accepte que mes informations soient utilisées pour répondre à ma demande (<a href="/confidentialite/">confidentialité</a>).</span></label>
+              <p class="field-msg"><Icon name="alert" size={16} /> Cochez cette case pour que je puisse vous répondre.</p>
+            </div>
+          </fieldset>
+
+          <div class="form-nav">
+            <button type="button" class="btn btn--outline" id="prev" hidden>Retour</button>
+            <button type="button" class="btn btn--primary" id="next" style="margin-left:auto">Continuer</button>
+            <button type="submit" class="btn btn--success" id="send" hidden style="margin-left:auto">Envoyer ma demande</button>
+          </div>
+        </form>
+
+        <div class="card success" id="success" hidden tabindex="-1" aria-live="polite">
+          <div class="check-circle"><Icon name="check" size={38} /></div>
+          <h2>{devis.confirmationTitre}</h2>
+          <p class="lead">{devis.confirmationTexte}</p>
+          <div class="recap" id="recap"></div>
+          <div class="btn-row" style="justify-content:center">
+            <a class="btn btn--primary" href="/realisations/">Voir les réalisations</a>
+            <a class="btn btn--outline" href="/">Retour à l'accueil</a>
+          </div>
         </div>
-      </form>
+      </div>
 
       <aside class="devis__aside">
         <div class="card">
@@ -96,43 +186,220 @@ const typesPro = ['Immobilier', 'Tourisme / hébergement', "Vidéo d'entreprise"
     </div>
   </section>
 
-  <script is:inline>
+  <div class="toast" id="toast" role="status" hidden><Icon name="check" size={20} /> <span>Demande de devis envoyée</span></div>
+
+  <script is:inline define:vars={{ EMAIL: site.email }}>
     (() => {
       const form = document.getElementById('devis');
       const panels = [...form.querySelectorAll('.step-panel')];
       const bars = [...form.querySelectorAll('.progress i')];
-      const prev = document.getElementById('prev'), next = document.getElementById('next'), send = document.getElementById('send'), err = document.getElementById('err');
+      const $ = (id) => document.getElementById(id);
+      const prev = $('prev'), next = $('next'), send = $('send'), err = $('err'), errText = $('err-text');
+      const dateIn = $('date'), dateFlex = $('date-flex'), lieu = $('lieu'), list = $('lieu-list');
+      const tel = $('tel'), indicatif = $('indicatif'), telFull = $('tel-full'), telMsg = $('tel-msg');
       let i = 0;
-      const params = new URLSearchParams(location.search);
-      const setProfil = (p) => {
-        form.querySelectorAll('optgroup[data-for]').forEach((g) => { g.hidden = g.dataset.for !== p; g.disabled = g.dataset.for !== p; });
+      const profil = () => form.querySelector('input[name=profil]:checked')?.value;
+
+      // ---- Profil : adapte les prestations, formules et champs
+      const applyProfil = () => {
+        const p = profil();
+        form.querySelectorAll('[data-for]').forEach((el) => {
+          const on = el.dataset.for === p;
+          el.hidden = !on;
+          if (el.tagName === 'OPTGROUP') el.disabled = !on;
+          el.querySelectorAll('input').forEach((inp) => { inp.disabled = !on; if (!on) inp.checked = false; });
+        });
+        form.querySelectorAll('[data-only]').forEach((el) => { el.hidden = el.dataset.only !== p; });
       };
-      if (params.get('profil')) {
-        const r = form.querySelector(`input[name=profil][value="${params.get('profil')}"]`);
-        if (r) { r.checked = true; setProfil(r.value); }
-      }
-      if (params.get('formule')) {
-        const f = params.get('formule');
-        const opt = [...form.formule.options].find((o) => o.value === f || o.text === f);
-        if (opt) opt.selected = true;
-        if (f === 'Partenariat') form.type.value = 'Partenariat';
-      }
-      form.querySelectorAll('input[name=profil]').forEach((r) => r.addEventListener('change', () => { setProfil(r.value); form.type.value = ''; setTimeout(() => go(1), 150); }));
-      const valid = () => [...panels[i].querySelectorAll('[required]')].every((el) => el.type === 'radio' ? form.querySelector(`input[name="${el.name}"]:checked`) : el.type === 'checkbox' ? el.checked : el.checkValidity() && el.value.trim());
+
+      // ---- Téléphone
+      const telRules = { '+33': { len: [10, 10], re: /^0[1-9]\d{8}$/, ex: '07 10 10 10 10', msg: 'Le numéro doit contenir 10 chiffres et commencer par 0, ex. 07 10 10 10 10.' } };
+      const rule = () => telRules[indicatif.value] || { len: [6, 13], re: /^\d{6,13}$/, ex: 'Numéro sans indicatif', msg: 'Le numéro doit contenir entre 6 et 13 chiffres.' };
+      const formatTel = () => {
+        const r = rule();
+        let d = tel.value.replace(/\D/g, '').slice(0, r.len[1]);
+        tel.value = indicatif.value === '+33' ? d.replace(/(\d{2})(?=\d)/g, '$1 ') : d;
+        tel.maxLength = indicatif.value === '+33' ? 14 : 13;
+      };
+      const telValid = () => rule().re.test(tel.value.replace(/\D/g, ''));
+      indicatif.addEventListener('change', () => {
+        tel.placeholder = rule().ex; telMsg.textContent = rule().msg; formatTel();
+        if (tel.value) check(tel.closest('.field'));
+      });
+      tel.addEventListener('input', formatTel);
+
+      // ---- Validation par champ
+      const msgs = {
+        email: ['Indiquez votre adresse email.', 'Cette adresse email ne semble pas valide, ex. vous@exemple.fr'],
+      };
+      const fieldOk = (f) => {
+        const name = f.dataset.field;
+        if (name === 'profil' || name === 'prestation') return !!form.querySelector(`input[name=${name}]:checked`);
+        if (name === 'date') return dateFlex.checked || !!dateIn.value;
+        if (name === 'tel') return telValid();
+        if (name === 'rgpd') return form.rgpd.checked;
+        if (name === 'email') {
+          const v = form.email.value.trim();
+          f.querySelector('.field-msg span').textContent = v ? msgs.email[1] : msgs.email[0];
+          return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+        }
+        const inp = f.querySelector('input, select, textarea');
+        return !!inp.value.trim();
+      };
+      const check = (f, showError = true) => {
+        const ok = fieldOk(f);
+        f.classList.toggle('is-valid', ok && !['profil', 'prestation', 'rgpd'].includes(f.dataset.field));
+        if (ok) f.classList.remove('is-invalid'); else if (showError) f.classList.add('is-invalid');
+        return ok;
+      };
+      const validateStep = () => {
+        const fields = [...panels[i].querySelectorAll('.field[data-field]')].filter((f) => !f.closest('[hidden]'));
+        const bad = fields.filter((f) => !check(f));
+        if (bad.length) {
+          errText.textContent = bad.length === 1 ? 'Il manque une information pour continuer : voir le champ en rouge.' : `Il manque ${bad.length} informations pour continuer : voir les champs en rouge.`;
+          err.hidden = false;
+          const first = bad[0].querySelector('input:not([type=hidden]):not(:disabled), select, textarea');
+          first?.focus({ preventScroll: true });
+          bad[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return false;
+        }
+        err.hidden = true;
+        return true;
+      };
+      form.addEventListener('input', (e) => {
+        const f = e.target.closest('.field[data-field]');
+        if (f && (f.classList.contains('is-invalid') || f.classList.contains('is-valid'))) check(f);
+        if (!form.querySelector('.is-invalid')) err.hidden = true;
+      });
+      form.addEventListener('change', (e) => {
+        const f = e.target.closest('.field[data-field]');
+        if (f) check(f, f.classList.contains('is-invalid'));
+        if (!form.querySelector('.is-invalid')) err.hidden = true;
+      });
+      form.addEventListener('focusout', (e) => {
+        const f = e.target.closest('.field[data-field]');
+        if (f && e.target.value && !['radio', 'checkbox'].includes(e.target.type)) check(f, f.classList.contains('is-invalid'));
+      });
+
+      // ---- Date : calendrier au clic, option "pas encore fixée"
+      const openPicker = () => { try { dateIn.showPicker(); } catch (_) {} };
+      dateIn.addEventListener('click', openPicker);
+      dateIn.addEventListener('focus', openPicker, { once: true });
+      dateFlex.addEventListener('change', () => {
+        dateIn.disabled = dateFlex.checked;
+        if (dateFlex.checked) dateIn.value = '';
+        check(dateIn.closest('.field'), false);
+      });
+
+      // ---- Lieu : auto-complétion (Base Adresse Nationale, data.geopf.fr)
+      let timer, ctrl, items = [], active = -1;
+      const closeList = () => { list.hidden = true; lieu.setAttribute('aria-expanded', 'false'); active = -1; };
+      const render = () => {
+        list.innerHTML = '';
+        items.forEach((it, k) => {
+          const li = document.createElement('li');
+          li.role = 'option'; li.id = 'lieu-opt-' + k;
+          li.innerHTML = `<strong></strong><small></small>`;
+          li.querySelector('strong').textContent = it.main;
+          li.querySelector('small').textContent = it.sub;
+          li.setAttribute('aria-selected', k === active);
+          li.addEventListener('mousedown', (e) => { e.preventDefault(); pick(k); });
+          list.appendChild(li);
+        });
+        list.hidden = !items.length;
+        lieu.setAttribute('aria-expanded', String(!!items.length));
+        lieu.setAttribute('aria-activedescendant', active >= 0 ? 'lieu-opt-' + active : '');
+      };
+      const pick = (k) => { lieu.value = items[k].label; closeList(); check(lieu.closest('.field')); };
+      lieu.addEventListener('input', () => {
+        clearTimeout(timer);
+        const q = lieu.value.trim();
+        if (q.length < 3) { items = []; render(); return; }
+        timer = setTimeout(async () => {
+          ctrl?.abort(); ctrl = new AbortController();
+          try {
+            const r = await fetch(`https://data.geopf.fr/geocodage/search?q=${encodeURIComponent(q)}&autocomplete=1&limit=6&lat=46.67&lon=-1.43`, { signal: ctrl.signal });
+            const data = await r.json();
+            const seen = new Set();
+            items = (data.features || []).map((f) => {
+              const p = f.properties;
+              const isCity = p.type === 'municipality';
+              return { label: p.label, main: isCity ? p.city : p.name, sub: isCity ? `${p.postcode} · ${(p.context || '').split(', ').slice(1).join(', ')}` : `${p.postcode} ${p.city}` };
+            }).filter((x) => !seen.has(x.label) && seen.add(x.label));
+            active = -1; render();
+          } catch (_) { /* hors ligne : saisie libre */ }
+        }, 220);
+      });
+      lieu.addEventListener('keydown', (e) => {
+        if (list.hidden) return;
+        if (e.key === 'ArrowDown') { active = (active + 1) % items.length; render(); e.preventDefault(); }
+        else if (e.key === 'ArrowUp') { active = (active - 1 + items.length) % items.length; render(); e.preventDefault(); }
+        else if (e.key === 'Enter' && active >= 0) { pick(active); e.preventDefault(); }
+        else if (e.key === 'Escape') closeList();
+      });
+      lieu.addEventListener('blur', () => setTimeout(closeList, 120));
+
+      // ---- Navigation entre étapes
       const show = () => {
         panels.forEach((p, k) => p.classList.toggle('active', k === i));
-        bars.forEach((b, k) => b.classList.toggle('on', k <= i));
-        prev.hidden = i === 0; next.hidden = i === panels.length - 1; send.hidden = i !== panels.length - 1; err.hidden = true;
+        bars.forEach((b, k) => { b.classList.toggle('done', k < i); b.classList.toggle('on', k === i); });
+        $('step-count').textContent = `Étape ${i + 1} sur ${panels.length}`;
+        prev.hidden = i === 0; next.hidden = i === panels.length - 1; send.hidden = i !== panels.length - 1;
+        err.hidden = true;
       };
       const go = (d) => {
-        if (d > 0 && !valid()) { err.hidden = false; return; }
+        if (d > 0 && !validateStep()) return;
         i = Math.max(0, Math.min(panels.length - 1, i + d)); show();
         form.scrollIntoView({ behavior: 'smooth', block: 'start' });
       };
       next.addEventListener('click', () => go(1));
       prev.addEventListener('click', () => go(-1));
-      form.addEventListener('submit', (e) => { if (!valid()) { e.preventDefault(); err.hidden = false; } });
+      form.querySelectorAll('input[name=profil]').forEach((r) => r.addEventListener('change', () => { applyProfil(); setTimeout(() => go(1), 180); }));
+
+      // ---- Paramètres d'URL (profil, formule)
+      const params = new URLSearchParams(location.search);
+      const pp = form.querySelector(`input[name=profil][value="${params.get('profil')}"]`);
+      if (pp) { pp.checked = true; applyProfil(); i = 1; }
+      else applyProfil();
+      const pf = params.get('formule');
+      if (pf) {
+        const opt = [...form.formule.options].find((o) => !o.parentElement.disabled && o.value === pf);
+        if (opt) opt.selected = true;
+      }
       show();
+
+      // ---- Envoi avec confirmation sur la même page
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validateStep()) return;
+        const digits = tel.value.replace(/\D/g, '');
+        telFull.value = indicatif.value + ' ' + (indicatif.value === '+33' ? digits.replace(/^0/, '') : digits);
+        send.disabled = true; send.textContent = 'Envoi en cours…';
+        try {
+          const r = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+          const res = await r.json();
+          if (!res.ok) throw new Error(res.error || 'send');
+          const recap = [
+            ['Prestation', form.querySelector('input[name=prestation]:checked')?.value],
+            ['Date', dateFlex.checked ? 'à définir' : new Date(dateIn.value).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })],
+            ['Lieu', lieu.value],
+          ];
+          $('recap').innerHTML = recap.map(([k, v]) => `<p><strong>${k} :</strong> <span></span></p>`).join('');
+          [...$('recap').querySelectorAll('span')].forEach((s, k) => { s.textContent = recap[k][1]; });
+          form.hidden = true;
+          const ok = $('success'); ok.hidden = false; ok.focus({ preventScroll: true });
+          ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const t = $('toast'); t.hidden = false; requestAnimationFrame(() => t.classList.add('show'));
+          setTimeout(() => { t.classList.remove('show'); setTimeout(() => (t.hidden = true), 400); }, 5000);
+        } catch (_) {
+          errText.innerHTML = '';
+          errText.append("L'envoi n'a pas fonctionné. Réessayez, ou écrivez-moi directement à ");
+          const a = document.createElement('a'); a.href = 'mailto:' + EMAIL; a.textContent = EMAIL;
+          errText.append(a, '.');
+          err.hidden = false;
+          send.disabled = false; send.textContent = 'Envoyer ma demande';
+        }
+      });
     })();
   </script>
 </Base>
@@ -141,11 +408,48 @@ const typesPro = ['Immobilier', 'Tourisme / hébergement', "Vidéo d'entreprise"
   .devis .card { padding: clamp(22px, 4vw, 40px); }
   .devis__aside { display: grid; gap: 20px; }
   .devis__aside a { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
-  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
-  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: .92rem; color: var(--muted); margin-top: 8px; }
-  .consent input { margin-top: 5px; }
-  .form-error { color: #c0262d; font-weight: 600; margin: 0; }
-  html:not(.js) .progress, html:not(.js) #next, html:not(.js) #prev { display: none; }
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 18px; }
+  legend { padding: 0; margin-bottom: 4px; }
+  legend h3 { margin: 0; }
+  .step-count { margin: -12px 0 0; font-weight: 600; }
+  .opt { font-weight: 400; color: var(--muted); font-size: .88rem; }
+  .choice span { display: flex; flex-wrap: wrap; align-items: center; column-gap: 10px; }
+  .choice span :global(svg) { color: var(--blue); flex: none; }
+  .choice span small { flex-basis: 100%; padding-left: 34px; }
+  .choices--list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .choice input:checked + span { border-color: var(--green); background: var(--green-50); box-shadow: 0 0 0 3px rgba(22,163,74,.15); }
+  .choice input:checked + span :global(svg) { color: var(--green); }
+  .is-invalid .choice span { border-color: var(--red); }
+  .input-icon { position: relative; }
+  .input-icon :global(svg) { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+  .input-icon input { padding-left: 44px; }
+  input[type=date] { cursor: pointer; min-height: 50px; }
+  input[type=date]:disabled { opacity: .5; cursor: not-allowed; }
+  .check-inline input { width: auto !important; }
+  .check-inline { display: inline-flex !important; align-items: center; gap: 8px; font-weight: 400 !important; color: var(--muted) !important; margin-top: 10px; cursor: pointer; }
+  .combo { position: relative; }
+  .combo__list { position: absolute; z-index: 20; left: 0; right: 0; top: calc(100% + 6px); list-style: none; margin: 0; padding: 6px; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-lg); max-height: 280px; overflow: auto; }
+  .combo__list :global(li) { padding: 10px 12px; border-radius: 8px; cursor: pointer; display: flex; flex-direction: column; }
+  .combo__list :global(li small) { color: var(--muted); }
+  .combo__list :global(li:hover), .combo__list :global(li[aria-selected=true]) { background: var(--blue-50); }
+  .phone { display: flex; border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff; }
+  .phone:focus-within { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(0,123,255,.15); }
+  .field .phone select { width: auto; border: 0; border-right: 1.5px solid var(--line); border-radius: 0; background: var(--bg-soft); padding-right: 8px; }
+  .field .phone input { border: 0; border-radius: 0; box-shadow: none !important; min-width: 0; }
+  .field.is-invalid .phone input, .field.is-invalid .phone select { background: var(--red-50); }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: .92rem; color: var(--muted) !important; font-weight: 400 !important; }
+  .consent input { margin-top: 5px; width: auto; }
+  .success { text-align: center; display: grid; justify-items: center; gap: 8px; border: 2px solid var(--green); }
+  .success:focus { outline: none; }
+  .success h2 { color: var(--green-600); margin-top: 16px; }
+  .recap { background: var(--bg-soft); border-radius: 12px; padding: 14px 20px; text-align: left; margin: 8px 0 18px; }
+  .recap p { margin: 4px 0; }
+  .toast { position: fixed; z-index: 60; left: 50%; bottom: 24px; transform: translate(-50%, 30px); opacity: 0; transition: all .3s ease; display: flex; align-items: center; gap: 10px; background: var(--green); color: #fff; padding: 14px 22px; border-radius: 999px; font-family: var(--font-title); font-weight: 700; box-shadow: 0 12px 30px rgba(22,163,74,.35); }
+  .toast { white-space: nowrap; }
+  .toast.show { transform: translate(-50%, 0); opacity: 1; }
+  @media (max-width: 720px) { .toast { bottom: 76px; } }
+  html:not(.js) .progress, html:not(.js) #next, html:not(.js) #prev, html:not(.js) .step-count { display: none; }
   html:not(.js) #send { display: inline-flex !important; }
+  html:not(.js) [data-for] { display: grid !important; }
   @media (max-width: 860px) { .devis { grid-template-columns: 1fr; } }
 </style>

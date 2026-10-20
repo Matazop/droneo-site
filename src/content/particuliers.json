@@ -3,20 +3,34 @@
   "introduction": "Mariage, anniversaire, fête de famille : des images aériennes uniques, montées en un film que vous reverrez toute votre vie.",
   "occasions": [
     {
-      "titre": "Mariage",
-      "texte": "L'arrivée des invités, le lieu de réception, la photo de groupe vue du ciel : des images que personne d'autre n'aura."
+      "titre": "Fête et célébration",
+      "exemples": "Mariage, anniversaire, baptême, fête de famille",
+      "texte": "L'arrivée des invités, le lieu de réception, la photo de groupe vue du ciel : des images que personne d'autre n'aura.",
+      "icone": "party"
     },
     {
-      "titre": "Fêtes et anniversaires",
-      "texte": "Un anniversaire marquant, une fête de famille, une réunion entre amis : un souvenir original à revoir ensemble."
+      "titre": "Festival et concert",
+      "exemples": "Festival, concert, spectacle en plein air",
+      "texte": "L'ampleur de la foule, la scène, l'ambiance : revivez l'événement comme si vous voliez au-dessus.",
+      "icone": "music"
     },
     {
-      "titre": "Demande en mariage",
-      "texte": "Un moment secret, un décor naturel vendéen, et une vidéo qui raconte le « oui »."
+      "titre": "Activité sportive",
+      "exemples": "Surf, kitesurf, voile, VTT, trail",
+      "texte": "Vos sessions et vos exploits filmés sous un angle impossible à obtenir depuis le sol.",
+      "icone": "sport"
     },
     {
-      "titre": "Votre maison, votre terrain",
-      "texte": "Une vue aérienne de votre propriété ou de votre région, pour le plaisir ou pour la garder en mémoire."
+      "titre": "Nature et paysages",
+      "exemples": "Côte, marais, forêts, votre propriété",
+      "texte": "La Vendée et ses paysages comme vous ne les avez jamais vus, ou votre maison et votre terrain vus du ciel.",
+      "icone": "leaf"
+    },
+    {
+      "titre": "Autre projet",
+      "exemples": "Demande en mariage, idée originale…",
+      "texte": "Vous avez une idée qui sort de l'ordinaire ? Parlons-en, on trouvera comment la filmer.",
+      "icone": "spark"
     }
   ],
   "formules": [

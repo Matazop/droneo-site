@@ -3,34 +3,39 @@
   "introduction": "Immobilier, tourisme, entreprise, événementiel : des vidéos qui attirent l'attention et donnent envie, livrées dans tous les formats dont vous avez besoin.",
   "secteurs": [
     {
-      "ancre": "immobilier",
-      "titre": "Immobilier",
-      "texte": "Démarquez vos annonces : terrain, environnement, accès, proximité de la mer. Les acheteurs comprennent le bien en quelques secondes."
+      "ancre": "evenementiel",
+      "titre": "Événement festif",
+      "exemples": "Soirée d'entreprise, festival, salon, inauguration",
+      "texte": "Aftermovie et contenus réseaux livrés vite, pendant que l'événement est encore dans toutes les têtes.",
+      "icone": "party"
     },
     {
-      "ancre": "tourisme",
-      "titre": "Tourisme et hébergement",
-      "texte": "Campings, gîtes, hôtels : une vidéo courte qui donne envie de réserver, prête pour votre site et les plateformes."
+      "ancre": "sport",
+      "titre": "Événement sportif",
+      "exemples": "Course, compétition, tournoi, régate",
+      "texte": "Suivi de course, vues d’ensemble, mise en valeur des partenaires : le sport sous son meilleur angle.",
+      "icone": "sport"
+    },
+    {
+      "ancre": "immobilier",
+      "titre": "Prise de vue immobilière",
+      "exemples": "Maison, terrain, programme neuf, camping, hôtel",
+      "texte": "Démarquez vos annonces : terrain, environnement, accès, proximité de la mer. Les acheteurs et les vacanciers comprennent le lieu en quelques secondes.",
+      "icone": "home"
     },
     {
       "ancre": "entreprise",
       "titre": "Vidéo d'entreprise",
-      "texte": "Présentez vos sites, vos chantiers ou votre savoir-faire de façon spectaculaire. Idéal pour la marque employeur."
+      "exemples": "Présentation, marque employeur, suivi de chantier",
+      "texte": "Présentez vos sites, vos chantiers ou votre savoir-faire de façon spectaculaire. Des points de vue réguliers pour suivre l’avancement de vos travaux.",
+      "icone": "building"
     },
     {
-      "ancre": "evenementiel",
-      "titre": "Événementiel et festivals",
-      "texte": "Aftermovie et contenus réseaux livrés vite, pendant que l'événement est encore dans toutes les têtes."
-    },
-    {
-      "ancre": "sport",
-      "titre": "Événements sportifs",
-      "texte": "Suivi de course, vues d’ensemble, mise en valeur des partenaires : le sport sous son meilleur angle."
-    },
-    {
-      "ancre": "chantier",
-      "titre": "BTP et suivi de chantier",
-      "texte": "Des points de vue réguliers pour suivre l'avancement et communiquer sur vos réalisations."
+      "ancre": "autre",
+      "titre": "Autre projet",
+      "exemples": "Tourisme, collectivité, projet sur mesure",
+      "texte": "Office de tourisme, collectivité, projet spécifique : décrivez votre besoin, je vous propose une solution adaptée.",
+      "icone": "spark"
     }
   ],
   "atouts": [

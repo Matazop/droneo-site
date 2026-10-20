@@ -21,6 +21,12 @@ components:
         - { value: drone, label: Drone }
         - { value: pin, label: Localisation }
         - { value: check, label: Coche }
+        - { value: party, label: Fête }
+        - { value: music, label: Musique (festival, concert) }
+        - { value: sport, label: Sport }
+        - { value: leaf, label: Nature }
+        - { value: home, label: Maison (immobilier) }
+        - { value: building, label: Bâtiment (entreprise) }
   formule:
     label: Formule
     type: object
@@ -114,7 +120,15 @@ content:
     fields:
       - { name: titre, label: Titre, type: string }
       - { name: introduction, label: Introduction, type: text }
-      - { name: occasions, label: Occasions, component: carte }
+      - name: occasions
+        label: Prestations (aussi proposées dans le formulaire de devis)
+        type: object
+        list: { collapsible: { collapsed: true, summary: "{fields.titre}" } }
+        fields:
+          - { name: titre, label: Titre, type: string, required: true }
+          - { name: exemples, label: Exemples (affichés dans le formulaire), type: string }
+          - { name: texte, label: Texte, type: text }
+          - { name: icone, component: icone }
       - { name: formules, label: Formules et prix, component: formule }
       - { name: offreLancement, label: Offre du moment, description: Laisser vide pour la masquer., type: string }
       - name: reassurance
@@ -135,12 +149,14 @@ content:
       - { name: titre, label: Titre, type: string }
       - { name: introduction, label: Introduction, type: text }
       - name: secteurs
-        label: Secteurs
+        label: Prestations (aussi proposées dans le formulaire de devis)
         type: object
         list: { collapsible: { collapsed: true, summary: "{fields.titre}" } }
         fields:
-          - { name: titre, label: Titre, type: string }
+          - { name: titre, label: Titre, type: string, required: true }
+          - { name: exemples, label: Exemples (affichés dans le formulaire), type: string }
           - { name: texte, label: Texte, type: text }
+          - { name: icone, component: icone }
           - { name: ancre, label: Identifiant technique (ne pas modifier), type: string }
       - name: atouts
         label: Atouts pour les pros
@@ -179,6 +195,17 @@ content:
       - { name: description, label: "Description courte (ex. Film de 4 min + teaser)", type: string }
       - { name: miniature, label: Image de couverture (facultatif), description: Sinon l'image YouTube est utilisée., type: image }
       - { name: accueil, label: Afficher sur la page d'accueil, type: boolean }
+
+  - name: devis
+    label: Formulaire de devis
+    type: file
+    path: src/content/devis.json
+    format: json
+    fields:
+      - { name: titre, label: Titre de la page, type: string }
+      - { name: introduction, label: Introduction, type: text }
+      - { name: confirmationTitre, label: Titre du message de confirmation, type: string }
+      - { name: confirmationTexte, label: Texte du message de confirmation, type: text }
 
   - name: faq
     label: Questions fréquentes
