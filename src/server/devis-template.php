@@ -1,7 +1,7 @@
 <?php
 // Envoi du formulaire de devis par email (hébergement Hostinger, PHP).
-// Adresse qui reçoit les demandes : à modifier si besoin.
-$destinataire = 'contact@droneo.fr';
+// Fichier généré à partir des réglages du back office (email de contact).
+$destinataire = '__EMAIL__';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: /devis/'); exit; }
 

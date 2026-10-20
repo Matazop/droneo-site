@@ -1,0 +1,100 @@
+{
+  "titre": "Des images aériennes qui valorisent votre activité.",
+  "introduction": "Immobilier, tourisme, entreprise, événementiel : des vidéos qui attirent l'attention et donnent envie, livrées dans tous les formats dont vous avez besoin.",
+  "secteurs": [
+    {
+      "ancre": "immobilier",
+      "titre": "Immobilier",
+      "texte": "Démarquez vos annonces : terrain, environnement, accès, proximité de la mer. Les acheteurs comprennent le bien en quelques secondes."
+    },
+    {
+      "ancre": "tourisme",
+      "titre": "Tourisme et hébergement",
+      "texte": "Campings, gîtes, hôtels : une vidéo courte qui donne envie de réserver, prête pour votre site et les plateformes."
+    },
+    {
+      "ancre": "entreprise",
+      "titre": "Vidéo d'entreprise",
+      "texte": "Présentez vos sites, vos chantiers ou votre savoir-faire de façon spectaculaire. Idéal pour la marque employeur."
+    },
+    {
+      "ancre": "evenementiel",
+      "titre": "Événementiel et festivals",
+      "texte": "Aftermovie et contenus réseaux livrés vite, pendant que l'événement est encore dans toutes les têtes."
+    },
+    {
+      "ancre": "sport",
+      "titre": "Événements sportifs",
+      "texte": "Suivi de course, vues d’ensemble, mise en valeur des partenaires : le sport sous son meilleur angle."
+    },
+    {
+      "ancre": "chantier",
+      "titre": "BTP et suivi de chantier",
+      "texte": "Des points de vue réguliers pour suivre l'avancement et communiquer sur vos réalisations."
+    }
+  ],
+  "atouts": [
+    {
+      "icone": "shield",
+      "titre": "Conformité garantie",
+      "texte": "Un vol professionnel exige un télépilote certifié, des déclarations et une assurance. Faire voler un amateur expose votre entreprise. Avec Droneo, tout est en règle."
+    },
+    {
+      "icone": "clock",
+      "titre": "Délais tenus",
+      "texte": "Délais annoncés dans le devis. 72 h pour une prestation immobilière."
+    },
+    {
+      "icone": "share",
+      "titre": "Tous vos formats",
+      "texte": "16:9 pour votre site et YouTube, 9:16 pour les Reels et TikTok, 1:1 pour LinkedIn et Facebook."
+    },
+    {
+      "icone": "euro",
+      "titre": "Devis et facture",
+      "texte": "Un devis détaillé sous 48 h et les droits d'utilisation commerciale inclus dans les formules pros."
+    }
+  ],
+  "formules": [
+    {
+      "nom": "Immo Flash",
+      "prix": 190,
+      "accroche": "Le bien et son environnement, en un coup d’œil.",
+      "inclus": [
+        "1 h de prise de vue",
+        "15 photos aériennes",
+        "Clip de 30 à 60 s (annonce + réseaux)",
+        "Livraison sous 72 h"
+      ],
+      "miseEnAvant": false
+    },
+    {
+      "nom": "Vitrine",
+      "prix": 590,
+      "accroche": "Une vidéo qui valorise votre activité partout.",
+      "inclus": [
+        "Demi-journée de tournage",
+        "Vidéo montée de 1 à 2 min",
+        "Déclinaisons 16:9, 9:16 et 1:1",
+        "Droits d'utilisation commerciale"
+      ],
+      "miseEnAvant": true
+    },
+    {
+      "nom": "Sur mesure",
+      "prix": null,
+      "accroche": "Événement, film d’entreprise, suivi de chantier…",
+      "inclus": [
+        "Tournage sur un ou plusieurs jours",
+        "Scénario et repérage",
+        "Montage et formats à la carte",
+        "Devis détaillé sous 48 h"
+      ],
+      "miseEnAvant": false
+    }
+  ],
+  "offreLancement": "Offre de lancement : votre première vidéo immo à 149 € (nouvelles agences et hébergements, jusqu'au 31 mars 2027).",
+  "partenairesTitre": "Vidéastes, photographes, agences : travaillons ensemble",
+  "partenairesTexte": "Vous couvrez un mariage ou un événement sans drone ? J'interviens en complément de votre équipe, avec des images livrées prêtes à intégrer à votre montage.",
+  "recurrentsTexte": "Agences immobilières, campings, promoteurs : des conditions adaptées pour des prises de vue régulières tout au long de l'année."
+}

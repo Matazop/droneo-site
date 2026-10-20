@@ -4,12 +4,12 @@ Site vitrine de Droneo : vidéos aériennes sur mesure en Vendée, par Mathieu A
 
 ## Modifier les contenus
 
-Presque tout se trouve dans `src/data/site.ts` : coordonnées, offres et prix, prestations, vidéos des réalisations, FAQ.
-Les éléments marqués « À COMPLÉTER » sont provisoires.
+Le contenu se modifie depuis le back office **Pages CMS** : https://app.pagescms.org (connexion avec GitHub, dépôt `droneo-site`).
 
-- Ajouter une vidéo : renseigner son identifiant YouTube (`youtubeId`) dans la liste `videos`.
-- Vidéo de fond de l'accueil : déposer un MP4 dans `public/video/` et renseigner `heroVideo`.
-- Adresse qui reçoit les demandes de devis : `public/devis.php`.
+- Les contenus sont stockés dans `src/content/*.json`.
+- La configuration du back office est dans `.pages.yml`.
+- Les images et vidéos envoyées depuis le back office vont dans `public/img/uploads/`.
+- L'email de contact des réglages reçoit aussi les demandes de devis (`devis.php` est généré à partir de `src/server/devis-template.php`).
 
 ## Fonctionnement
 
@@ -17,6 +17,7 @@ Les éléments marqués « À COMPLÉTER » sont provisoires.
 - À chaque envoi sur `main`, GitHub Actions construit le site et publie le résultat sur la branche `hostinger`.
 - Hostinger (Déploiement à partir de GitHub) est relié à la branche `hostinger`.
 - Le formulaire de devis est envoyé par `devis.php` (PHP de Hostinger).
+- Chaque enregistrement dans le back office crée un commit sur `main`, ce qui republie le site.
 
 ## En local
 

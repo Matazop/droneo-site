@@ -5,7 +5,8 @@ import Trust from '../components/Trust.astro';
 import VideoCard from '../components/VideoCard.astro';
 import VideoPlayer from '../components/VideoPlayer.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { site, pillars, steps, videos } from '../data/site';
+import { site, pillars, steps, videos, accueil, testimonials } from '../data/site';
+const homeVideos = (videos.filter((v) => v.home).length ? videos.filter((v) => v.home) : videos).slice(0, 3);
 ---
 <Base title="Droneo | Vidéo drone sur mesure en Vendée, mariages, événements, entreprises"
   description="Vidéos et photos aériennes par drone en Vendée et Pays de la Loire. Mariages, événements, immobilier, entreprises : une vidéo sur mesure par un télépilote certifié CATS. Devis sous 48 h.">
@@ -17,9 +18,9 @@ import { site, pillars, steps, videos } from '../data/site';
     <div class="hero__sky" aria-hidden="true"></div>
     <div class="wrap hero__inner">
       <div class="hero__text">
-        <span class="eyebrow" style="color:#5fb0ff">Vidéaste drone · Vendée</span>
-        <h1>Vos plus beaux moments, <span class="hl">vus du ciel.</span></h1>
-        <p class="lead">Des vidéos aériennes sur mesure, filmées et montées par un télépilote certifié. Pour les particuliers comme pour les professionnels.</p>
+        <span class="eyebrow" style="color:#5fb0ff">{accueil.surtitre}</span>
+        <h1>{accueil.titre} <span class="hl">{accueil.titreCouleur}</span></h1>
+        <p class="lead">{accueil.introduction}</p>
         <div class="btn-row">
           <a class="btn btn--primary" href="/particuliers/">Je suis un particulier</a>
           <a class="btn btn--white" href="/professionnels/">Je suis un professionnel</a>
@@ -41,8 +42,8 @@ import { site, pillars, steps, videos } from '../data/site';
     <div class="wrap">
       <div class="section-head section-head--center reveal">
         <span class="eyebrow">Pourquoi Droneo</span>
-        <h2>Bien plus que des images de drone</h2>
-        <p class="lead">Une vraie vidéo, pensée pour vous, de la préparation au montage final.</p>
+        <h2>{accueil.piliersTitre}</h2>
+        <p class="lead">{accueil.piliersIntro}</p>
       </div>
       <div class="grid grid-4">
         {pillars.map((p) => (
@@ -91,7 +92,7 @@ import { site, pillars, steps, videos } from '../data/site';
         <a class="btn btn--outline" href="/realisations/">Toutes les réalisations</a>
       </div>
       <div class="grid grid-3">
-        {videos.slice(0, 3).map((v) => <VideoCard {...v} />)}
+        {homeVideos.map((v) => <VideoCard {...v} />)}
       </div>
     </div>
   </section>
@@ -100,7 +101,7 @@ import { site, pillars, steps, videos } from '../data/site';
     <div class="wrap">
       <div class="section-head section-head--center reveal">
         <span class="eyebrow">Comment ça marche</span>
-        <h2>Simple, du premier message à la livraison</h2>
+        <h2>{accueil.etapesTitre}</h2>
       </div>
       <div class="grid grid-4 steps">
         {steps.map((s) => (
@@ -117,18 +118,37 @@ import { site, pillars, steps, videos } from '../data/site';
     <div class="wrap split">
       <div class="reveal">
         <span class="eyebrow">Votre pilote</span>
-        <h2>{site.pilot}, télépilote certifié</h2>
-        <p class="lead">Passionné d'image et de pilotage, je mets mon expérience au service de vos projets, partout en Vendée et dans les Pays de la Loire.</p>
-        <p>Titulaire du CATS, je vole dans le respect de la réglementation : déclarations, autorisations et assurance professionnelle. Vous n'avez à vous occuper de rien, sinon de profiter du résultat.</p>
+        <h2>{accueil.piloteTitre}</h2>
+        <p class="lead">{accueil.piloteIntro}</p>
+        <p>{accueil.piloteTexte}</p>
         <a class="btn btn--outline" href="/a-propos/">En savoir plus</a>
       </div>
       <div class="card reveal" style="text-align:center;padding:48px 28px">
         <img src="/img/logo-full.png" alt="Logo Droneo" width="180" height="181" style="margin:0 auto 20px" />
-        <p class="quote">« Une vidéo réussie, c'est d'abord une histoire bien comprise. Le drone n'est que l'outil. »</p>
+        <p class="quote">« {accueil.citation} »</p>
         <p class="note">{site.pilot}</p>
       </div>
     </div>
   </section>
+
+  {testimonials.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head section-head--center reveal">
+          <span class="eyebrow">Ils m'ont fait confiance</span>
+          <h2>Ce qu'en disent mes clients</h2>
+        </div>
+        <div class="grid grid-3">
+          {testimonials.map((t) => (
+            <figure class="card reveal" style="margin:0">
+              <blockquote class="quote" style="margin:0 0 16px">« {t.texte} »</blockquote>
+              <figcaption><strong>{t.nom}</strong>{t.contexte && <span class="note"> · {t.contexte}</span>}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <CtaBand />
   <VideoPlayer />

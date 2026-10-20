@@ -1,0 +1,213 @@
+# Back office Droneo (Pages CMS : https://app.pagescms.org)
+# Chaque enregistrement met le site à jour automatiquement en 2 à 3 minutes.
+
+media:
+  input: public/img/uploads
+  output: /img/uploads
+  categories: [image, video]
+
+components:
+  icone:
+    label: Icône
+    type: select
+    options:
+      values:
+        - { value: spark, label: Étoile (sur mesure) }
+        - { value: shield, label: Bouclier (sécurité, certification) }
+        - { value: route, label: Parcours (de A à Z) }
+        - { value: share, label: Écran (diffusion, formats) }
+        - { value: clock, label: Horloge (délais, discrétion) }
+        - { value: euro, label: Euro (prix, facture) }
+        - { value: drone, label: Drone }
+        - { value: pin, label: Localisation }
+        - { value: check, label: Coche }
+  formule:
+    label: Formule
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{fields.nom} : {fields.prix} €"
+    fields:
+      - { name: nom, label: Nom de la formule, type: string, required: true }
+      - { name: prix, label: Prix « à partir de » en euros, description: Laisser vide pour afficher « Sur devis »., type: number }
+      - { name: accroche, label: Phrase d'accroche, type: string }
+      - { name: inclus, label: Ce qui est inclus, description: Une ligne par élément., type: string, list: true }
+      - { name: miseEnAvant, label: Mettre en avant (badge « La plus choisie »), type: boolean }
+  carte:
+    label: Carte
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{fields.titre}"
+    fields:
+      - { name: titre, label: Titre, type: string, required: true }
+      - { name: texte, label: Texte, type: text }
+
+content:
+  - name: reglages
+    label: Coordonnées et réglages
+    type: file
+    path: src/content/reglages.json
+    format: json
+    fields:
+      - { name: nom, label: Nom de l'entreprise, type: string }
+      - { name: pilote, label: Nom du pilote, type: string }
+      - { name: email, label: Email de contact, description: Reçoit aussi les demandes de devis du formulaire., type: string, required: true }
+      - { name: telephone, label: Téléphone, description: "Exemple : 06 12 34 56 78", type: string }
+      - { name: whatsapp, label: Numéro WhatsApp, description: Laisser vide pour utiliser le téléphone., type: string }
+      - { name: instagram, label: Lien Instagram, type: string }
+      - { name: facebook, label: Lien Facebook, type: string }
+      - { name: linkedin, label: Lien LinkedIn, type: string }
+      - { name: zone, label: Zone d'intervention, type: string }
+      - { name: delaiReponse, label: Délai de réponse affiché, description: "Exemple : 48 h", type: string }
+      - { name: rayonDeplacement, label: Rayon de déplacement offert (km), type: number }
+      - { name: statut, label: Statut juridique (mentions légales), type: string }
+      - { name: siret, label: SIRET, type: string }
+      - { name: adresse, label: Adresse professionnelle, type: string }
+      - { name: assureur, label: Assureur RC Pro, type: string }
+
+  - name: accueil
+    label: Page d'accueil
+    type: file
+    path: src/content/accueil.json
+    format: json
+    fields:
+      - { name: surtitre, label: Petit texte au-dessus du titre, type: string }
+      - { name: titre, label: Titre principal (partie blanche), type: string }
+      - { name: titreCouleur, label: Titre principal (partie bleue), type: string }
+      - { name: introduction, label: Texte d'introduction, type: text }
+      - { name: videoFond, label: Vidéo de fond (MP4 court, sans son), description: "Idéalement 20 à 30 s, moins de 15 Mo.", type: file }
+      - { name: bandeDemo, label: Lien YouTube de la bande démo, type: string }
+      - { name: piliersTitre, label: "Section « Pourquoi Droneo » : titre", type: string }
+      - { name: piliersIntro, label: "Section « Pourquoi Droneo » : introduction", type: string }
+      - name: piliers
+        label: Les points forts
+        type: object
+        list: { collapsible: { collapsed: true, summary: "{fields.titre}" } }
+        fields:
+          - { name: titre, label: Titre, type: string }
+          - { name: texte, label: Texte, type: text }
+          - { name: icone, component: icone }
+      - { name: etapesTitre, label: "Section « Comment ça marche » : titre", type: string }
+      - { name: etapes, label: Les étapes, component: carte }
+      - { name: piloteTitre, label: "Section pilote : titre", type: string }
+      - { name: piloteIntro, label: "Section pilote : introduction", type: text }
+      - { name: piloteTexte, label: "Section pilote : texte", type: text }
+      - { name: citation, label: Citation, type: text }
+      - name: temoignages
+        label: Témoignages clients
+        description: La section n'apparaît que s'il y a au moins un témoignage.
+        type: object
+        list: { collapsible: { collapsed: true, summary: "{fields.nom}" } }
+        fields:
+          - { name: nom, label: Nom du client, type: string }
+          - { name: contexte, label: "Contexte (ex. Mariage à Challans)", type: string }
+          - { name: texte, label: Témoignage, type: text }
+
+  - name: particuliers
+    label: Page Particuliers
+    type: file
+    path: src/content/particuliers.json
+    format: json
+    fields:
+      - { name: titre, label: Titre, type: string }
+      - { name: introduction, label: Introduction, type: text }
+      - { name: occasions, label: Occasions, component: carte }
+      - { name: formules, label: Formules et prix, component: formule }
+      - { name: offreLancement, label: Offre du moment, description: Laisser vide pour la masquer., type: string }
+      - name: reassurance
+        label: Réponses aux craintes
+        type: object
+        list: { collapsible: { collapsed: true, summary: "{fields.titre}" } }
+        fields:
+          - { name: titre, label: Titre, type: string }
+          - { name: texte, label: Texte, type: text }
+          - { name: icone, component: icone }
+
+  - name: professionnels
+    label: Page Professionnels
+    type: file
+    path: src/content/professionnels.json
+    format: json
+    fields:
+      - { name: titre, label: Titre, type: string }
+      - { name: introduction, label: Introduction, type: text }
+      - name: secteurs
+        label: Secteurs
+        type: object
+        list: { collapsible: { collapsed: true, summary: "{fields.titre}" } }
+        fields:
+          - { name: titre, label: Titre, type: string }
+          - { name: texte, label: Texte, type: text }
+          - { name: ancre, label: Identifiant technique (ne pas modifier), type: string }
+      - name: atouts
+        label: Atouts pour les pros
+        type: object
+        list: { collapsible: { collapsed: true, summary: "{fields.titre}" } }
+        fields:
+          - { name: titre, label: Titre, type: string }
+          - { name: texte, label: Texte, type: text }
+          - { name: icone, component: icone }
+      - { name: formules, label: Formules et prix, component: formule }
+      - { name: offreLancement, label: Offre du moment, description: Laisser vide pour la masquer., type: string }
+      - { name: partenairesTitre, label: "Section partenaires : titre", type: string }
+      - { name: partenairesTexte, label: "Section partenaires : texte", type: text }
+      - { name: recurrentsTexte, label: "Encadré clients récurrents", type: text }
+
+  - name: realisations
+    label: Réalisations (vidéos)
+    type: file
+    path: src/content/realisations.json
+    format: json
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{fields.titre}"
+    fields:
+      - { name: titre, label: Titre, type: string, required: true }
+      - { name: categorie, label: "Catégorie (ex. Mariage, Immobilier)", type: string }
+      - name: public
+        label: Public
+        type: select
+        options:
+          values:
+            - { value: particuliers, label: Particuliers }
+            - { value: pros, label: Professionnels }
+      - { name: youtube, label: Lien YouTube, description: Collez le lien de la vidéo YouTube., type: string }
+      - { name: description, label: "Description courte (ex. Film de 4 min + teaser)", type: string }
+      - { name: miniature, label: Image de couverture (facultatif), description: Sinon l'image YouTube est utilisée., type: image }
+      - { name: accueil, label: Afficher sur la page d'accueil, type: boolean }
+
+  - name: faq
+    label: Questions fréquentes
+    type: file
+    path: src/content/faq.json
+    format: json
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{fields.question}"
+    fields:
+      - { name: question, label: Question, type: string, required: true }
+      - { name: reponse, label: Réponse, type: text }
+
+  - name: apropos
+    label: Page À propos
+    type: file
+    path: src/content/a-propos.json
+    format: json
+    fields:
+      - { name: titre, label: Titre, type: string }
+      - { name: introduction, label: Introduction, type: text }
+      - { name: photo, label: Votre photo, type: image }
+      - { name: parcours, label: Votre parcours, description: Laissez une ligne vide entre deux paragraphes., type: text }
+      - { name: materiel, label: Votre matériel, type: text }
+
+settings:
+  commit:
+    templates:
+      update: "Back office : mise à jour de {path}"
+      create: "Back office : ajout de {path}"
+      delete: "Back office : suppression de {path}"

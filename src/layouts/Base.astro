@@ -102,7 +102,9 @@ const jsonLd = {
         <h4>Contact</h4>
         <a href={`tel:${site.phoneIntl}`}><Icon name="phone" size={18} /> {site.phone}</a>
         <a href={`mailto:${site.email}`}><Icon name="mail" size={18} /> {site.email}</a>
-        <a href={site.instagram} rel="noopener" target="_blank"><Icon name="instagram" size={18} /> Instagram</a>
+        {site.instagram && <a href={site.instagram} rel="noopener" target="_blank"><Icon name="instagram" size={18} /> Instagram</a>}
+        {site.facebook && <a href={site.facebook} rel="noopener" target="_blank">Facebook</a>}
+        {site.linkedin && <a href={site.linkedin} rel="noopener" target="_blank">LinkedIn</a>}
         <span><Icon name="pin" size={18} /> {site.zone}</span>
       </div>
     </div>

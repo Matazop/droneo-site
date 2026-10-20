@@ -1,0 +1,56 @@
+[
+  {
+    "titre": "Mariage au domaine",
+    "categorie": "Mariage",
+    "public": "particuliers",
+    "youtube": "",
+    "description": "Film de 4 min + teaser Instagram",
+    "miniature": "",
+    "accueil": true
+  },
+  {
+    "titre": "Villa en bord de mer",
+    "categorie": "Immobilier",
+    "public": "pros",
+    "youtube": "",
+    "description": "Clip annonce de 45 s + 15 photos",
+    "miniature": "",
+    "accueil": true
+  },
+  {
+    "titre": "Camping sur la côte",
+    "categorie": "Tourisme",
+    "public": "pros",
+    "youtube": "",
+    "description": "Vidéo de présentation, 3 formats",
+    "miniature": "",
+    "accueil": true
+  },
+  {
+    "titre": "Course sur le littoral",
+    "categorie": "Sport",
+    "public": "pros",
+    "youtube": "",
+    "description": "Aftermovie de 2 min",
+    "miniature": "",
+    "accueil": false
+  },
+  {
+    "titre": "Anniversaire en famille",
+    "categorie": "Fête",
+    "public": "particuliers",
+    "youtube": "",
+    "description": "Clip souvenir de 1 min 30",
+    "miniature": "",
+    "accueil": false
+  },
+  {
+    "titre": "Chantier en cours",
+    "categorie": "Entreprise",
+    "public": "pros",
+    "youtube": "",
+    "description": "Suivi mensuel, vue fixe répétée",
+    "miniature": "",
+    "accueil": false
+  }
+]

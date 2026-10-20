@@ -1,0 +1,56 @@
+{
+  "surtitre": "Vidéaste drone · Vendée",
+  "titre": "Vos plus beaux moments,",
+  "titreCouleur": "vus du ciel.",
+  "introduction": "Des vidéos aériennes sur mesure, filmées et montées par un télépilote certifié. Pour les particuliers comme pour les professionnels.",
+  "videoFond": "",
+  "bandeDemo": "",
+  "piliersTitre": "Bien plus que des images de drone",
+  "piliersIntro": "Une vraie vidéo, pensée pour vous, de la préparation au montage final.",
+  "piliers": [
+    {
+      "titre": "Sur mesure",
+      "texte": "Chaque vidéo est pensée pour votre projet : plans, durée, musique et formats. Pas de rushes livrés en vrac.",
+      "icone": "spark"
+    },
+    {
+      "titre": "Pilote certifié",
+      "texte": "Télépilote titulaire du CATS. Vols déclarés, autorisations gérées et assurance professionnelle : vous êtes couvert.",
+      "icone": "shield"
+    },
+    {
+      "titre": "De A à Z",
+      "texte": "Un seul interlocuteur, du premier échange à la livraison : repérage, tournage, montage, étalonnage.",
+      "icone": "route"
+    },
+    {
+      "titre": "Prêt à diffuser",
+      "texte": "Formats adaptés à votre écran, votre site, Instagram, TikTok ou LinkedIn. Il ne reste plus qu'à partager.",
+      "icone": "share"
+    }
+  ],
+  "etapesTitre": "Simple, du premier message à la livraison",
+  "etapes": [
+    {
+      "titre": "Vous me parlez de votre projet",
+      "texte": "Par le formulaire, téléphone ou WhatsApp. On définit ensemble ce que vous voulez montrer."
+    },
+    {
+      "titre": "Je vous envoie un devis clair",
+      "texte": "Sous 48 h, avec le contenu exact, le prix et le délai de livraison."
+    },
+    {
+      "titre": "Je filme, en toute sécurité",
+      "texte": "Je gère les autorisations de vol et la météo. Vous profitez de votre événement."
+    },
+    {
+      "titre": "Vous recevez votre vidéo",
+      "texte": "Montée, étalonnée, aux bons formats. Prête à être partagée."
+    }
+  ],
+  "piloteTitre": "Mathieu Azzopardi, télépilote certifié",
+  "piloteIntro": "Passionné d'image et de pilotage, je mets mon expérience au service de vos projets, partout en Vendée et dans les Pays de la Loire.",
+  "piloteTexte": "Titulaire du CATS, je vole dans le respect de la réglementation : déclarations, autorisations et assurance professionnelle. Vous n'avez à vous occuper de rien, sinon de profiter du résultat.",
+  "citation": "Une vidéo réussie, c'est d'abord une histoire bien comprise. Le drone n'est que l'outil.",
+  "temoignages": []
+}

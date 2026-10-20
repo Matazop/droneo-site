@@ -1,0 +1,78 @@
+{
+  "titre": "Le souvenir que vos invités n'auront pas sur leur téléphone.",
+  "introduction": "Mariage, anniversaire, fête de famille : des images aériennes uniques, montées en un film que vous reverrez toute votre vie.",
+  "occasions": [
+    {
+      "titre": "Mariage",
+      "texte": "L'arrivée des invités, le lieu de réception, la photo de groupe vue du ciel : des images que personne d'autre n'aura."
+    },
+    {
+      "titre": "Fêtes et anniversaires",
+      "texte": "Un anniversaire marquant, une fête de famille, une réunion entre amis : un souvenir original à revoir ensemble."
+    },
+    {
+      "titre": "Demande en mariage",
+      "texte": "Un moment secret, un décor naturel vendéen, et une vidéo qui raconte le « oui »."
+    },
+    {
+      "titre": "Votre maison, votre terrain",
+      "texte": "Une vue aérienne de votre propriété ou de votre région, pour le plaisir ou pour la garder en mémoire."
+    }
+  ],
+  "formules": [
+    {
+      "nom": "Envol",
+      "prix": 390,
+      "accroche": "L'essentiel pour immortaliser un temps fort.",
+      "inclus": [
+        "Jusqu'à 2 h sur place",
+        "Vols aux moments clés",
+        "Clip monté de 1 min 30, avec musique",
+        "10 photos aériennes"
+      ],
+      "miseEnAvant": false
+    },
+    {
+      "nom": "Souvenir",
+      "prix": 690,
+      "accroche": "Le film de votre journée, vu du ciel.",
+      "inclus": [
+        "Jusqu'à 4 h sur place",
+        "Film monté de 3 à 4 min",
+        "Teaser vertical pour Instagram",
+        "20 photos aériennes"
+      ],
+      "miseEnAvant": true
+    },
+    {
+      "nom": "Prestige",
+      "prix": 990,
+      "accroche": "De la cérémonie à la soirée, rien ne vous échappe.",
+      "inclus": [
+        "Présence étendue sur la journée",
+        "Film monté de 5 à 8 min",
+        "Teaser vertical + toutes les photos",
+        "Rushes fournis"
+      ],
+      "miseEnAvant": false
+    }
+  ],
+  "offreLancement": "Mariage 2027 réservé avant le 31 décembre 2026 : teaser vertical offert.",
+  "reassurance": [
+    {
+      "titre": "Discret",
+      "texte": "Les vols sont courts et planifiés avec vous. Le drone ne perturbe ni la cérémonie, ni vos invités.",
+      "icone": "clock"
+    },
+    {
+      "titre": "En sécurité",
+      "texte": "Distances de sécurité respectées, autorisations demandées, assurance professionnelle.",
+      "icone": "shield"
+    },
+    {
+      "titre": "Sans stress météo",
+      "texte": "Si le temps ne permet pas de voler, on trouve une solution ensemble : report sans frais ou adaptation du programme.",
+      "icone": "spark"
+    }
+  ]
+}

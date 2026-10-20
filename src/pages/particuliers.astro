@@ -4,17 +4,13 @@ import PageHero from '../components/PageHero.astro';
 import OfferGrid from '../components/OfferGrid.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { offersParticuliers, servicesParticuliers, launchOffers } from '../data/site';
-const reassurance = [
-  { icon: 'clock', title: 'Discret', text: "Les vols sont courts et planifiés avec vous. Le drone ne perturbe ni la cérémonie, ni vos invités." },
-  { icon: 'shield', title: 'En sécurité', text: 'Distances de sécurité respectées, autorisations demandées, assurance professionnelle.' },
-  { icon: 'spark', title: 'Sans stress météo', text: "Si le temps ne permet pas de voler, on trouve une solution ensemble : report sans frais ou adaptation du programme." },
-];
+import { offersParticuliers, servicesParticuliers, launchOffers, particuliers } from '../data/site';
+const reassurance = particuliers.reassurance.map((r) => ({ icon: r.icone, title: r.titre, text: r.texte }));
 ---
 <Base title="Vidéo drone mariage et événements privés en Vendée"
   description="Vidéo drone pour votre mariage, anniversaire ou fête de famille en Vendée. Film souvenir monté sur mesure par un télépilote certifié. Formules dès 390 €.">
-  <PageHero eyebrow="Particuliers" title="Le souvenir que vos invités n'auront pas sur leur téléphone."
-    lead="Mariage, anniversaire, fête de famille : des images aériennes uniques, montées en un film que vous reverrez toute votre vie.">
+  <PageHero eyebrow="Particuliers" title={particuliers.titre}
+    lead={particuliers.introduction}>
     <div class="btn-row" style="margin-top:28px">
       <a class="btn btn--primary" href="#formules">Voir les formules</a>
       <a class="btn btn--ghost" href="/devis/?profil=particuliers">Parlons de votre événement</a>
@@ -43,7 +39,7 @@ const reassurance = [
         <p class="lead">Montage, musique et autorisations de vol sont toujours inclus.</p>
       </div>
       <OfferGrid offers={offersParticuliers} audience="particuliers" />
-      <div class="promo reveal"><span class="play play--sm"></span>{launchOffers.particuliers}</div>
+      {launchOffers.particuliers && <div class="promo reveal"><span class="play play--sm"></span>{launchOffers.particuliers}</div>}
     </div>
   </section>
 

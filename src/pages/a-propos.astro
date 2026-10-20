@@ -3,17 +3,15 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { site } from '../data/site';
+import { site, aPropos } from '../data/site';
 ---
 <Base title={`À propos : ${site.pilot}, télépilote drone en Vendée`} description={`${site.pilot}, télépilote certifié CATS en Vendée. Vidéos aériennes sur mesure pour particuliers et professionnels.`}>
-  <PageHero eyebrow="À propos" title={`Je suis ${site.pilot}, votre pilote.`} lead="Passionné d'image et de pilotage, je crée des vidéos aériennes qui racontent votre histoire." />
+  <PageHero eyebrow="À propos" title={aPropos.titre} lead={aPropos.introduction} />
   <section class="section">
     <div class="wrap split">
       <div class="reveal prose">
         <h2>Mon parcours</h2>
-        <!-- À COMPLÉTER : remplacer par le vrai parcours de Mathieu -->
-        <p>Tout a commencé par une passion pour l'image et les grands espaces vendéens. Le drone m'a permis de montrer ce que l'on ne voit jamais : un lieu, un événement, une entreprise sous un angle totalement nouveau.</p>
-        <p>Aujourd'hui, j'accompagne particuliers et professionnels de la préparation jusqu'au montage final. Mon objectif est simple : que vous soyez fier de partager votre vidéo.</p>
+        {aPropos.parcours.split(/\n\s*\n/).map((para) => <p>{para}</p>)}
         <h2>Le CATS, c'est quoi ?</h2>
         <p>Le CATS (certificat d'aptitude théorique de télépilote) est le certificat qui permet de réaliser des vols professionnels encadrés par la réglementation. Concrètement, pour vous, cela signifie :</p>
         <ul>
@@ -23,13 +21,17 @@ import { site } from '../data/site';
         </ul>
       </div>
       <div class="reveal">
-        <div class="photo-placeholder" role="img" aria-label="Photo de Mathieu à venir">
-          <img src="/img/logo-mark-dark.png" alt="" width="120" height="120" />
-          <span>Photo de Mathieu à venir</span>
-        </div>
+        {aPropos.photo ? (
+          <img class="photo" src={aPropos.photo} alt={site.pilot} loading="lazy" />
+        ) : (
+          <div class="photo-placeholder" role="img" aria-label="Photo à venir">
+            <img src="/img/logo-mark-dark.png" alt="" width="120" height="120" />
+            <span>Photo à venir</span>
+          </div>
+        )}
         <div class="grid" style="margin-top:24px">
           <div class="card"><div class="icon"><Icon name="pin" /></div><h3>Zone d'intervention</h3><p>{site.zone}. Déplacements plus lointains sur demande.</p></div>
-          <div class="card"><div class="icon"><Icon name="drone" /></div><h3>Matériel</h3><p>Drone professionnel avec caméra 4K stabilisée, adapté à la vidéo comme à la photo. <!-- À COMPLÉTER : modèle exact --></p></div>
+          <div class="card"><div class="icon"><Icon name="drone" /></div><h3>Matériel</h3><p>{aPropos.materiel}</p></div>
         </div>
       </div>
     </div>
@@ -37,5 +39,6 @@ import { site } from '../data/site';
   <CtaBand />
 </Base>
 <style>
+  .photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 24px; box-shadow: var(--shadow-lg); }
   .photo-placeholder { aspect-ratio: 4/5; border-radius: 24px; background: linear-gradient(160deg, var(--blue) 0%, var(--navy) 80%); display: grid; place-content: center; justify-items: center; gap: 16px; color: #dbe8f8; font-family: var(--font-title); font-weight: 600; box-shadow: var(--shadow-lg); }
 </style>

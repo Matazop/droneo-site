@@ -1,4 +1,5 @@
 ---
+import { site } from '../data/site';
 interface Offer { name: string; price: number | null; pitch: string; features: string[]; featured?: boolean }
 interface Props { offers: Offer[]; audience: 'particuliers' | 'pros' }
 const { offers, audience } = Astro.props;
@@ -19,4 +20,4 @@ const { offers, audience } = Astro.props;
     </article>
   ))}
 </div>
-<p class="note" style="margin-top:20px">Autorisations de vol incluses. Déplacement offert dans un rayon de 50 km. Prix indicatifs, le devis précise le contenu exact.</p>
+<p class="note" style="margin-top:20px">Autorisations de vol incluses. Déplacement offert dans un rayon de {site.radius} km. Prix indicatifs, le devis précise le contenu exact.</p>
