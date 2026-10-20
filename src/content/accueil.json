@@ -3,8 +3,7 @@
   "titre": "Vos plus beaux moments,",
   "titreCouleur": "vus du ciel.",
   "introduction": "Des vidéos aériennes sur mesure, filmées et montées par un télépilote certifié. Pour les particuliers comme pour les professionnels.",
-  "videoFond": "",
-  "bandeDemo": "",
+  "bandeDemo": "https://youtu.be/4SJRHbrwPXo",
   "piliersTitre": "Bien plus que des images de drone",
   "piliersIntro": "Une vraie vidéo, pensée pour vous, de la préparation au montage final.",
   "piliers": [
@@ -51,6 +50,5 @@
   "piloteTitre": "Mathieu Azzopardi, télépilote certifié",
   "piloteIntro": "Passionné d'image et de pilotage, je mets mon expérience au service de vos projets, partout en Vendée et dans les Pays de la Loire.",
   "piloteTexte": "Titulaire du CATS, je vole dans le respect de la réglementation : déclarations, autorisations et assurance professionnelle. Vous n'avez à vous occuper de rien, sinon de profiter du résultat.",
-  "citation": "Une vidéo réussie, c'est d'abord une histoire bien comprise. Le drone n'est que l'outil.",
-  "temoignages": []
+  "citation": "Une vidéo réussie, c'est d'abord une histoire bien comprise. Le drone n'est que l'outil."
 }
