@@ -1,17 +1,11 @@
 {
   "nom": "Droneo",
   "pilote": "Mathieu Azzopardi",
-  "email": "contact@droneo.fr",
+  "email": "contact.droneo@gmail.com",
   "telephone": "06 00 00 00 00",
   "whatsapp": "06 00 00 00 00",
   "instagram": "https://www.instagram.com/",
-  "facebook": "",
-  "linkedin": "",
   "zone": "Vendée et Pays de la Loire",
   "delaiReponse": "48 h",
-  "rayonDeplacement": 50,
-  "statut": "",
-  "siret": "",
-  "adresse": "",
-  "assureur": ""
+  "rayonDeplacement": 50
 }
